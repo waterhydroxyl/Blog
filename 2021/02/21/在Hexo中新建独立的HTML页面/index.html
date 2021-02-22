@@ -92,7 +92,7 @@
   
     <div class="header-content">
       
-        <div class="post-image" style="background-image: url(https://ilikestudy.cn/images/main.jpg)"></div>
+        <div class="post-image" style="background-image: url(https://cloud.ilikestudy.cn/images/main.jpg)"></div>
       
 
       <div class="post-text">
@@ -129,7 +129,7 @@
       
 
       <section class="article-entry">
-        <div class="aplayer" data-name='愛にできることはまだあるかい (爱能做到的还有什么)' data-artist='RADWIMPS' data-lrc='/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).lrc' data-url='/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).mp3' data-cover='/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).jpg' ></div>
+        <div class="aplayer" data-name='愛にできることはまだあるかい (爱能做到的还有什么)' data-artist='RADWIMPS' data-lrc='https://cloud.ilikestudy.cn/music/RADWIMPS%20-%20%E6%84%9B%E3%81%AB%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AF%E3%81%BE%E3%81%A0%E3%81%82%E3%82%8B%E3%81%8B%E3%81%84%20%28%E7%88%B1%E8%83%BD%E5%81%9A%E5%88%B0%E7%9A%84%E8%BF%98%E6%9C%89%E4%BB%80%E4%B9%88%29.lrc' data-url='https://cloud.ilikestudy.cn/music/RADWIMPS%20-%20%E6%84%9B%E3%81%AB%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AF%E3%81%BE%E3%81%A0%E3%81%82%E3%82%8B%E3%81%8B%E3%81%84%20%28%E7%88%B1%E8%83%BD%E5%81%9A%E5%88%B0%E7%9A%84%E8%BF%98%E6%9C%89%E4%BB%80%E4%B9%88%29.mp3' data-cover='https://cloud.ilikestudy.cn/music/RADWIMPS%20-%20%E6%84%9B%E3%81%AB%E3%81%A7%E3%81%8D%E3%82%8B%E3%81%93%E3%81%A8%E3%81%AF%E3%81%BE%E3%81%A0%E3%81%82%E3%82%8B%E3%81%8B%E3%81%84%20%28%E7%88%B1%E8%83%BD%E5%81%9A%E5%88%B0%E7%9A%84%E8%BF%98%E6%9C%89%E4%BB%80%E4%B9%88%29.jpg' ></div>
 <h3 id="实现方法："><a href="#实现方法：" class="headerlink" title="实现方法："></a>实现方法：</h3><p>Hexo 是一个轻量、快速，简单和强大的博客框架，当我们需要发布博文的时候，只需要将写好的文章（MarkDown 文件）放入本地的文件夹，然后再推送上去就行了，原理就是当我们在执行<code>hexo g</code>命令时，文件就会被转化成 HTML 文件，但是有时候我们需要新建一个独立的页面，这个页面不使用主题的渲染，具有自己独立的样式，可以放一些自己的作品，相册什么的，以下就介绍这种独立页面的实现方法。</p>
 <p>使用 Hexo 提供的跳过渲染配置，在博客根目录的配置文件 <code>_config.yml</code> 里找到 <code>skip_render</code> 关键字，在后面添加想要跳过渲染的页面，比如我们创建 <code>\source\about\index.html</code>， 配置文件填写：<code>skip_render: about**</code>，那么就表示 <code>\source\about</code> 里所有的文件将跳过渲染，里面的文件将会被直接复制到 public 文件夹，此时就会得到一个独立的 about 页面；官方文档：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/docs/configuration">https://hexo.io/docs/configuration</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Directory</span><br><span class="hljs-attr">source_dir:</span> <span class="hljs-string">source</span><br><span class="hljs-attr">public_dir:</span> <span class="hljs-string">public</span><br><span class="hljs-attr">tag_dir:</span> <span class="hljs-string">tags</span><br><span class="hljs-attr">archive_dir:</span> <span class="hljs-string">archives</span><br><span class="hljs-attr">category_dir:</span> <span class="hljs-string">categories</span><br><span class="hljs-attr">code_dir:</span> <span class="hljs-string">downloads/code</span><br><span class="hljs-attr">i18n_dir:</span> <span class="hljs-string">:langh</span><br><span class="hljs-attr">skip_render:</span> <span class="hljs-string">&#x27;demo/*&#x27;</span><br></code></pre></td></tr></table></figure>
