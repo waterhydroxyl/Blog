@@ -65,6 +65,8 @@
         
           <li class="navbar-list-item"><a href="/about">关于</a></li>
         
+          <li class="navbar-list-item"><a href="/demo/">许愿</a></li>
+        
       </ul>
     </div>
   </div>
@@ -146,6 +148,17 @@
 
   
   
+    <h4 style="padding-top: 10px">如需留言，请针对 disq.us | disquscdn.com | disqus.com 启用代理，并遵守中国大陆法律法规</h4>
+    <div style="text-align:center;">
+      <button class="btncomment" id="load-disqus" onclick="disqus.load();">
+        加载Disqus
+      </button>
+    </div>
+    <div class="disqus-container">
+      <p id="disqus_error" class="disqus-error" style="display: none;">如果你看不到评论，那么就真的看不到评论 w(゜Д゜)w</p>
+      <div id="disqus_thread" class="disqus-thread"></div>
+    </div>
+  
 
 
       </section>
@@ -158,7 +171,7 @@
         <div id="article-nav-older" class="card-item img">
           <article>
             
-              <div class="card-cover" style="background-image: url(https://www.hualigs.cn/image/602295c8a6088.jpg)"></div>
+              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/images/IMG_7182.JPEG)"></div>
             
             <a class="card-link article-nav-link" href="/2021/02/08/My-New-Post/"></a>
             <strong class="article-nav-caption">Older</strong>
@@ -252,6 +265,38 @@
   
   
 
+  <!-- disqus 评论 start -->
+  <script type="text/javascript">
+    /*
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    /*
+      var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+    */
+    var disqus = {
+      load : function (){
+        (function() {
+      var d = document, s = d.createElement('script'), c = d.querySelector(".disqus-container");
+      if (!c) return;
+      s.src = 'https://waterhydroxyl.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      s.onerror = () => {
+        let t = document.querySelector("#disqus_error");
+        t.style.display = "block";
+      }
+      (d.head || d.body).appendChild(s);
+    })();
+        $('#load-disqus').remove();    //插入这一行代码 (3/5)
+      }    //插入这一行代码 (4/5)
+    }    //插入这一行代码 (5/5)
+  </script>
+  <!-- disqus 评论 end -->
+  
 
   <!-- aplayer 音频 start -->
   <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
