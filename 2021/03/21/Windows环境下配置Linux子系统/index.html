@@ -20,7 +20,7 @@
 
   
 
-  <title>在Hexo中新建独立的HTML页面 | waterhydroxyl</title>
+  <title>Windows环境下配置Linux子系统 | waterhydroxyl</title>
 
   
 
@@ -91,20 +91,20 @@
   
     <div class="header-content">
       
-        <div class="post-image" style="background-image: url(https://cloud.ilikestudy.cn/images/main.jpg)"></div>
+        <div class="post-image" style="background-image: url(https://cloud.ilikestudy.cn/images/WindowsLinux.jpg)"></div>
       
 
       <div class="post-text">
         <div class="type-wrap">
           <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
         </div>
-        <h1 class="title-wrap">在Hexo中新建独立的HTML页面</h1>
+        <h1 class="title-wrap">Windows环境下配置Linux子系统</h1>
         <h2 class="title-sub-wrap">
           <strong>waterhydroxyl</strong>
           <span>发布于</span>
           
   <a href="javascript:;" class="article-date">
-    <time datetime="2021-02-21T02:03:32.000Z" itemprop="datePublished">2021-02-21</time>
+    <time datetime="2021-03-21T07:47:22.000Z" itemprop="datePublished">2021-03-21</time>
   </a>
 
         </h2>
@@ -128,11 +128,20 @@
       
 
       <section class="article-entry">
-        <div class="aplayer" data-name='愛にできることはまだあるかい (爱能做到的还有什么)' data-artist='RADWIMPS' data-lrc='https://cloud.ilikestudy.cn/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).lrc' data-url='https://cloud.ilikestudy.cn/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).mp3' data-cover='https://cloud.ilikestudy.cn/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).jpg' ></div>
-<h3 id="实现方法："><a href="#实现方法：" class="headerlink" title="实现方法："></a>实现方法：</h3><p>Hexo 是一个轻量、快速，简单和强大的博客框架，当我们需要发布博文的时候，只需要将写好的文章（MarkDown 文件）放入本地的文件夹，然后再推送上去就行了，原理就是当我们在执行<code>hexo g</code>命令时，文件就会被转化成 HTML 文件，但是有时候我们需要新建一个独立的页面，这个页面不使用主题的渲染，具有自己独立的样式，可以放一些自己的作品，相册什么的，以下就介绍这种独立页面的实现方法。</p>
-<p>使用 Hexo 提供的跳过渲染配置，在博客根目录的配置文件 <code>_config.yml</code> 里找到 <code>skip_render</code> 关键字，在后面添加想要跳过渲染的页面，比如我们创建 <code>\source\demo\index.html</code>， 配置文件填写：<code>skip_render: 'demo/*'</code>，那么就表示 <code>\source\demo</code> 里所有的文件将跳过渲染，里面的文件将会被直接复制到 public 文件夹，此时就会得到一个独立的 demo 页面；官方文档：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/docs/configuration">https://hexo.io/docs/configuration</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Directory</span><br><span class="hljs-attr">source_dir:</span> <span class="hljs-string">source</span><br><span class="hljs-attr">public_dir:</span> <span class="hljs-string">public</span><br><span class="hljs-attr">tag_dir:</span> <span class="hljs-string">tags</span><br><span class="hljs-attr">archive_dir:</span> <span class="hljs-string">archives</span><br><span class="hljs-attr">category_dir:</span> <span class="hljs-string">categories</span><br><span class="hljs-attr">code_dir:</span> <span class="hljs-string">downloads/code</span><br><span class="hljs-attr">i18n_dir:</span> <span class="hljs-string">:langh</span><br><span class="hljs-attr">skip_render:</span> <span class="hljs-string">&#x27;demo/*&#x27;</span><br></code></pre></td></tr></table></figure>
-<h3 id="以我博客-100-晴天女孩-页面为例："><a href="#以我博客-100-晴天女孩-页面为例：" class="headerlink" title="以我博客 100%晴天女孩 页面为例："></a>以我博客 <a target="_blank" rel="noopener" href="https://ilikestudy.cn/demo">100%晴天女孩</a> 页面为例：</h3><p><img src="https://cloud.ilikestudy.cn/images/QNmain.png"></p>
+        <h1 id="Windows环境下配置Linux子系统"><a href="#Windows环境下配置Linux子系统" class="headerlink" title="Windows环境下配置Linux子系统"></a>Windows环境下配置Linux子系统</h1><p>总所周知Linux是非常适合开发的系统环境，对于搭建各种各样的开发环境比Windows下方便非常多例如Linux下所有编码缺省都utf8，而windows就存在gbk码，utf8码，utf16/ucs2le之间转换的问题。</p>
+<p>而windows提供了Linux子系统（WSL）的功能，接下来就让我们按照步骤安装WSL。</p>
+<h2 id="步骤一：启用适用于-Linux-的-Windows-子系统"><a href="#步骤一：启用适用于-Linux-的-Windows-子系统" class="headerlink" title="步骤一：启用适用于 Linux 的 Windows 子系统"></a>步骤一：启用适用于 Linux 的 Windows 子系统</h2><p>打开CMD窗口，输入以下命令启用“适用于 Linux 的 Windows 子系统”可选功能，或者在搜索栏中搜索并打开“启用或关闭Windows功能”，勾选“适用于Linux的Windows子系统”项。只有开启这项设置才能正常安装WSL。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart<br></code></pre></td></tr></table></figure>
+<p><img src="https://cloud.ilikestudy.cn/images/cmd.png" alt="cmd截图"></p>
+<h2 id="步骤二：安装所选的-Linux-分发"><a href="#步骤二：安装所选的-Linux-分发" class="headerlink" title="步骤二：安装所选的 Linux 分发"></a>步骤二：安装所选的 Linux 分发</h2><p>打开<a target="_blank" rel="noopener" href="https://aka.ms/wslstore">Microsoft Store</a>,并选择你偏好的 Linux 分发版。进行下载安装。（如果无法登录微软账户可以通过更改DNS解决）</p>
+<p><img src="https://cloud.ilikestudy.cn/images/MS.png" alt="商店截图"></p>
+<h2 id="步骤三：打开所下载的Linux，设置账户密码，进行换源。"><a href="#步骤三：打开所下载的Linux，设置账户密码，进行换源。" class="headerlink" title="步骤三：打开所下载的Linux，设置账户密码，进行换源。"></a>步骤三：打开所下载的Linux，设置账户密码，进行换源。</h2><h3 id="a：查看版本信息"><a href="#a：查看版本信息" class="headerlink" title="a：查看版本信息"></a>a：查看版本信息</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">lsb_release -c<br></code></pre></td></tr></table></figure>
+<p>Ubuntu 18.04 LTS 的代号是 ：bionic；之后根据版本代号百度找到适合的阿里源或清华源</p>
+<h3 id="b：编辑源文件"><a href="#b：编辑源文件" class="headerlink" title="b：编辑源文件"></a>b：编辑源文件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">sudo vim /etc/apt/sources.list<br></code></pre></td></tr></table></figure>
+<h3 id="c：根据版本号添加相应内容："><a href="#c：根据版本号添加相应内容：" class="headerlink" title="c：根据版本号添加相应内容："></a>c：根据版本号添加相应内容：</h3><p>键入<code>i</code>进行插入编辑,最后键入<code>:wq</code>强制保存推出<br><img src="https://cloud.ilikestudy.cn/images/QQ20210321163231.png" alt="QQ截图"></p>
+<h3 id="d：更新和升级"><a href="#d：更新和升级" class="headerlink" title="d：更新和升级"></a>d：更新和升级</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> update<br>sudo apt-<span class="hljs-builtin-name">get</span> upgrade<br></code></pre></td></tr></table></figure>
+
+<h2 id="步骤四：安装-Windows-终端（可选）"><a href="#步骤四：安装-Windows-终端（可选）" class="headerlink" title="步骤四：安装 Windows 终端（可选）"></a>步骤四：安装 Windows 终端（可选）</h2><p>Windows 终端可启用多个选项卡（在多个 Linux 命令行、Windows 命令提示符、PowerShell 和 Azure CLI 或自定义的 SSH 之间快速切换）、创建键绑定（用于打开或关闭选项卡、复制粘贴等的快捷方式键）、使用搜索功能，以及使用自定义主题（配色方案、字体样式和大小、背景图像/模糊/透明度）。<br><img src="https://cloud.ilikestudy.cn/images/Tshell.png" alt="QQ截图"></p>
 
       </section>
 
@@ -167,32 +176,17 @@
   <nav class="card-container card-article-nav">
     <div class="card-list">
       
-        <div id="article-nav-newer" class="card-item img">
-          <article>
-            
-              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/images/WindowsLinux.jpg)"></div>
-            
-            <a class="card-link article-nav-link" href="/2021/03/21/Windows%E7%8E%AF%E5%A2%83%E4%B8%8B%E9%85%8D%E7%BD%AELinux%E5%AD%90%E7%B3%BB%E7%BB%9F/"></a>
-            <strong class="article-nav-caption">Newer</strong>
-            <p class="article-nav-title">
-              
-                Windows环境下配置Linux子系统
-              
-            </p>
-          </article>
-        </div>
-      
       
         <div id="article-nav-older" class="card-item img">
           <article>
             
-              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/images/IMG_7182.JPEG)"></div>
+              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/images/main.jpg)"></div>
             
-            <a class="card-link article-nav-link" href="/2021/02/08/My-New-Post/"></a>
+            <a class="card-link article-nav-link" href="/2021/02/21/%E5%9C%A8Hexo%E4%B8%AD%E6%96%B0%E5%BB%BA%E7%8B%AC%E7%AB%8B%E7%9A%84HTML%E9%A1%B5%E9%9D%A2/"></a>
             <strong class="article-nav-caption">Older</strong>
             <p class="article-nav-title">
               
-                Hello World
+                在Hexo中新建独立的HTML页面
               
             </p>
           </article>
