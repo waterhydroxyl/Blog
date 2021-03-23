@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="waterhydroxyl">
+  
+
+  
+
+  
+
+  <title>Windows环境下配置Linux子系统 | waterhydroxyl</title>
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.3/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/monokai.css">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<!--  <script data-ad-client="ca-pub-7869113324411211" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          waterhydroxyl
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/demo/">许愿</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      
+        <div class="post-image" style="background-image: url(https://cloud.ilikestudy.cn/images/WindowsLinux.jpg)"></div>
+      
+
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
+        </div>
+        <h1 class="title-wrap">Windows环境下配置Linux子系统</h1>
+        <h2 class="title-sub-wrap">
+          <strong>waterhydroxyl</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2021-03-21T07:47:22.000Z" itemprop="datePublished">2021-03-21</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="Windows环境下配置Linux子系统"><a href="#Windows环境下配置Linux子系统" class="headerlink" title="Windows环境下配置Linux子系统"></a>Windows环境下配置Linux子系统</h1><p>众所周知Linux是非常适合开发的系统环境，对于搭建各种各样的开发环境比Windows下方便非常多例如Linux下所有编码缺省都utf8，而windows就存在gbk码，utf8码，utf16/ucs2le之间转换的问题。</p>
+<p>而windows提供了Linux子系统（WSL）的功能，接下来就让我们按照步骤安装WSL。</p>
+<h2 id="步骤一：启用适用于-Linux-的-Windows-子系统"><a href="#步骤一：启用适用于-Linux-的-Windows-子系统" class="headerlink" title="步骤一：启用适用于 Linux 的 Windows 子系统"></a>步骤一：启用适用于 Linux 的 Windows 子系统</h2><p>打开CMD窗口，输入以下命令启用“适用于 Linux 的 Windows 子系统”可选功能，或者在搜索栏中搜索并打开“启用或关闭Windows功能”，勾选“适用于Linux的Windows子系统”项。只有开启这项设置才能正常安装WSL。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart<br></code></pre></td></tr></table></figure>
+<p><img src="https://cloud.ilikestudy.cn/images/cmd.png" alt="cmd截图"></p>
+<h2 id="步骤二：安装所选的-Linux-分发"><a href="#步骤二：安装所选的-Linux-分发" class="headerlink" title="步骤二：安装所选的 Linux 分发"></a>步骤二：安装所选的 Linux 分发</h2><p>打开<a target="_blank" rel="noopener" href="https://aka.ms/wslstore">Microsoft Store</a>,并选择你偏好的 Linux 分发版。进行下载安装。（如果无法登录微软账户可以通过更改DNS解决）</p>
+<p><img src="https://cloud.ilikestudy.cn/images/MS.png" alt="商店截图"></p>
+<h2 id="步骤三：打开所下载的Linux，设置账户密码，进行换源。"><a href="#步骤三：打开所下载的Linux，设置账户密码，进行换源。" class="headerlink" title="步骤三：打开所下载的Linux，设置账户密码，进行换源。"></a>步骤三：打开所下载的Linux，设置账户密码，进行换源。</h2><h3 id="a：查看版本信息"><a href="#a：查看版本信息" class="headerlink" title="a：查看版本信息"></a>a：查看版本信息</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">lsb_release -c<br></code></pre></td></tr></table></figure>
+<p>Ubuntu 18.04 LTS 的代号是 ：bionic；之后根据版本代号百度找到适合的阿里源或清华源</p>
+<h3 id="b：编辑源文件"><a href="#b：编辑源文件" class="headerlink" title="b：编辑源文件"></a>b：编辑源文件</h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmd">sudo vim /etc/apt/sources.list<br></code></pre></td></tr></table></figure>
+<h3 id="c：根据版本号添加相应内容："><a href="#c：根据版本号添加相应内容：" class="headerlink" title="c：根据版本号添加相应内容："></a>c：根据版本号添加相应内容：</h3><p>键入<code>i</code>进行插入编辑,最后键入<code>:wq</code>强制保存推出<br><img src="https://cloud.ilikestudy.cn/images/QQ20210321163231.png" alt="QQ截图"></p>
+<h3 id="d：更新和升级"><a href="#d：更新和升级" class="headerlink" title="d：更新和升级"></a>d：更新和升级</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-builtin-name">get</span> update<br>sudo apt-<span class="hljs-builtin-name">get</span> upgrade<br></code></pre></td></tr></table></figure>
+
+<h2 id="步骤四：安装-Windows-终端（可选）"><a href="#步骤四：安装-Windows-终端（可选）" class="headerlink" title="步骤四：安装 Windows 终端（可选）"></a>步骤四：安装 Windows 终端（可选）</h2><p>Windows 终端可启用多个选项卡（在多个 Linux 命令行、Windows 命令提示符、PowerShell 和 Azure CLI 或自定义的 SSH 之间快速切换）、创建键绑定（用于打开或关闭选项卡、复制粘贴等的快捷方式键）、使用搜索功能，以及使用自定义主题（配色方案、字体样式和大小、背景图像/模糊/透明度）。<br><img src="https://cloud.ilikestudy.cn/images/Tshell.png" alt="QQ截图"></p>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">#教程</a></li></ul>
+      </section>
+
+      <section class="comment">
+        
+  
+  
+
+  
+  
+
+    <div style="text-align:center;">
+      <button class="btncomment" id="load-disqus" onclick="disqus.load();">
+        加载Disqus
+      </button>
+    </div>
+    <div class="disqus-container">
+
+      <p id="disqus_error" class="disqus-error" style="display: none;">如果你看不到评论，那么就真的看不到评论 w(゜Д゜)w 或者针对 disq.us | disquscdn.com | disqus.com 启用代理</p>
+      <div id="disqus_thread" class="disqus-thread">
+
+      </div>
+    </div>
+  
+
+
+      </section>
+      <section class="article-navs">
+        
+  <nav class="card-container card-article-nav">
+    <div class="card-list">
+      
+      
+        <div id="article-nav-older" class="card-item img">
+          <article>
+            
+              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/images/main.jpg)"></div>
+            
+            <a class="card-link article-nav-link" href="/posts/15479.html"></a>
+            <strong class="article-nav-caption">Older</strong>
+            <p class="article-nav-title">
+              
+                在Hexo中新建独立的HTML页面
+              
+            </p>
+          </article>
+        </div>
+      
+    </div>
+  </nav>
+  
+      </section>
+
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+    <div class="footer-container">
+
+        <p>&copy; 2021 <a href="/" target="_blank">waterhydroxyl</a></p>
+
+        
+
+
+        <div style="width:300px;margin:0 auto; padding:20px 0;">
+            <a target="_blank" href="https://beian.miit.gov.cn"
+               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">桂ICP备17007944号</p></a>
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45048102000081"
+               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="https://cloud.ilikestudy.cn/index/beian.png"
+                                                                                                    style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">桂公网安备
+                    45048102000081号</p></a>
+
+        </div>
+        <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a
+                    href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a>
+        </p>
+
+
+        <!--
+        <div class="footer-container__texts">
+          <p>ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ｀ヽ、ヽ｀、ヽ｀｀、ヽ、｀｀、、ヽ｀ヽ、｀｀、、ヽ｀ヽ、｀ヽ、｀ヽ、｀ヽ</p>
+          <p>｀、ヽ｀｀、ヽ、｀｀｀、｀、ヽ🌙｀｀、｀ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、ヽ｀｀、｀ヽ、｀</p>
+          <p>｀、｀｀、｀、ヽ｀｀、、ヽヽ｀、｀ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、、、ヽヽ、｀｀、、ヽ｀、ヽ｀｀、ヽ｀ヽ｀</p>
+          <p>ヽ｀、｀｀、｀、ヽ｀｀、、ヽヽ｀、｀、、ヽヽ、｀Time waits for on one 🍓｀、、ヽ｀、ヽ｀｀、ヽ｀ヽ｀</p>
+          <p>｀ヽ｀｀、ヽ｀ヽ｀、、ヽ｀ヽ｀ヽ｀ヽ、ヽ｀、ヽ｀｀、ヽ、｀｀、、ヽ｀ヽ、｀｀、、ヽ｀ヽ、｀ヽ、｀ヽ、｀ヽ</p>
+        </div>
+        -->
+    </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+  <!-- disqus 评论 start -->
+  <script type="text/javascript">
+    /*
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    /*
+      var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+    */
+    var disqus = {
+      load : function (){
+        (function() {
+      var d = document, s = d.createElement('script'), c = d.querySelector(".disqus-container");
+      if (!c) return;
+      s.src = 'https://waterhydroxyl.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      s.onerror = () => {
+        let t = document.querySelector("#disqus_error");
+        t.style.display = "block";
+      }
+      (d.head || d.body).appendChild(s);
+    })();
+        $('#load-disqus').remove();    //插入这一行代码 (3/5)
+      }    //插入这一行代码 (4/5)
+    }    //插入这一行代码 (5/5)
+  </script>
+  <!-- disqus 评论 end -->
+  
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        let params = {
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        }
+        if (el.dataset.lrc) {
+          params['lrcType'] = 3
+        }
+        new APlayer(params);
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>
