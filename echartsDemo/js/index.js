@@ -278,7 +278,7 @@
     myChart.resize();
   })
 
-  var links = document.querySelectorAll("a");
+  const links = document.querySelectorAll("a");
   for (let index = 0; index < links.length; index++) {
 
     links[index].onclick = function () {

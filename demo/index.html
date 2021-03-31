@@ -5,127 +5,14 @@
   <meta charset="UTF-8">
   <title>100%晴天女孩</title>
   <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
-
+  <link rel="stylesheet" href="/public/css/bootstrap.css">
+  <link rel="stylesheet" href="/public/css/index.css">
   <script src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-      list-style: none
-    }
-
-    .main {
-      /* border: 1px solid green; */
-      background-image: url(https://cloud.ilikestudy.cn/images/main.jpg);
-      background-size: cover;
-      width: 900px;
-      height: 660px;
-      margin: 20px auto 30px auto;
-      position: relative;
-    }
-
-    .input-box {
-      /* border: 1px solid red; */
-      background-color: bisque;
-      position: absolute;
-      bottom: 0;
-      right: 55px;
-      width: 370px;
-      height: 335px;
-      border-radius: 10px;
-      box-shadow: rgb(85, 85, 85) 0px 0px 5px;
-    }
-
-    .box1 {
-      /* border: 1px solid indigo; */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 10px 15px 0px 15px;
-    }
-
-    .box1 span {
-      font-size: 22px;
-      color: red;
-    }
-
-    .box2 {
-      /* border: 1px solid hotpink; */
-      margin: 10px 15px 0px 15px;
-    }
-
-    .box3 {
-      /* border: 1px solid aqua; */
-      display: flex;
-      margin: 10px 15px 0px 15px;
-      justify-content: space-between;
-    }
-
-    .box4 {
-      /* border: 1px solid thistle; */
-      margin: 10px 15px 0px 15px;
-    }
-
-    .input-address {
-      width: 99%;
-    }
-
-    .box5 {
-      /* border: 1px solid salmon; */
-      margin: 10px 15px 0px 15px;
-    }
-
-    .input-reason {
-      width: 99.5%;
-      height: 50px;
-      resize: none;
-    }
-
-    .box6 {
-      /* border: 1px solid olivedrab; */
-      margin: 5px 15px 0px 15px;
-      text-align: center;
-    }
-
-    .box6 button {
-      background: red;
-      border: none;
-      outline: none;
-      border-radius: 20px;
-      color: white;
-      width: 100px;
-      height: 35px;
-    }
-
-    .comment {
-      width: 900px;
-      height: auto;
-      right: 0;
-      margin: 20px auto;
-      position: relative;
-      background-color: antiquewhite;
-      border-radius: 10px;
-      box-shadow: rgb(85, 85, 85) 0px 0px 5px;
-    }
-
-    .comment ul li {
-      height: auto;
-      margin: 10px auto;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #222;
-    }
-
-    #aplayer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 334px;
-    }
-  </style>
 </head>
 <body>
 <div class="main">
   <div id="aplayer"></div>
+  <form action="/doadd" method="GET">
   <div class="input-box">
     <div class="box1">
       <span>¥0</span>
@@ -136,32 +23,35 @@
     <div class="box3">
       <div class="input-name">
         <div>你的昵称:</div>
-        <input type="text" id="nikeName">
+        <input type="text" id="nikeName" name="name">
       </div>
       <div class="input-date">
         <div>日期：</div>
-        <input id="dateTime" type="date"/>
+        <input id="dateTime" type="date" name="sunday"/>
       </div>
     </div>
     <div class="box4">
       <div>希望天晴的地址：</div>
-      <input type="text" class="input-address" id="txtAddress">
+      <input type="text" class="input-address" id="txtAddress" name="address">
     </div>
     <div class="box5">
       <div>希望天晴的理由：</div>
-      <textarea class="input-reason" id="txtCom"></textarea>
+      <textarea class="input-reason" id="txtCom" name="content"></textarea>
     </div>
     <div class="box6">
-      <button id="btn1">提交请求</button>
+      <button type="submit" class="btn1">发表</button>
     </div>
   </div>
+</form>
 </div>
-<div class="comment">
-  <h1>大家的委托:</h1>
-  <br/>
-  <ul id="olid">
-  </ul>
 
+<div class="header container">
+  <div class="page-header">
+    <h1>大家的委托</h1>
+  </div>
+</div>
+<div class="comments container">
+  <ul class="list-group">^_^</ul>
 </div>
 
 </body>
@@ -180,34 +70,9 @@
   const btn1 = document.getElementById('btn1');
 
   btn1.onclick = function () {
-    const nikeName = document.getElementById('nikeName').value;
-    const txtCom = document.getElementById('txtCom').value;
-    const txtAddress = document.getElementById('txtAddress').value;
-    const dateTime = document.getElementById('dateTime').value;
-
-    const time = new Date().getTime() + Math.random() * 5;
-    localStorage.setItem(time, nikeName + "希望" + txtAddress + "在" + dateTime + "天晴，因为" + txtCom);
-
     alert("许愿不花钱,也没有晴女");
-    alert("数据仅保留在本地浏览器缓存，仅此以作纪念");
-    location.reload();
-    writeData();
-  }
-  const olid = document.getElementById('olid');
-
-  function writeData() {
-    for (let i = localStorage.length - 1; i >= 0; i--) {
-      const data = localStorage.getItem(localStorage.key(i));
-      console.log(data);
-      const liobj = document.createElement("LI");
-      liobj.innerHTML = data;
-      olid.appendChild(liobj);
-    }
   }
 
-  window.onload = function () {
-    writeData();
-  }
 </script>
 
 </html>
