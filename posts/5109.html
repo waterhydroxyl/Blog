@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="waterhydroxyl">
+  
+
+  
+
+  
+
+  <title>理解JavaScript中的原型链-Prototypes | waterhydroxyl</title>
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.3/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/monokai.css">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<!--  <script data-ad-client="ca-pub-7869113324411211" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          waterhydroxyl
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/demo/">许愿</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      
+        <div class="post-image" style="background-image: url(https://cloud.ilikestudy.cn/images/Prototypes/JS.png)"></div>
+      
+
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+        </div>
+        <h1 class="title-wrap">理解JavaScript中的原型链-Prototypes</h1>
+        <h2 class="title-sub-wrap">
+          <strong>waterhydroxyl</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2021-04-30T13:10:35.000Z" itemprop="datePublished">2021-04-30</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <blockquote>
+<p>源文章来源<a target="_blank" rel="noopener" href="https://code.tutsplus.com/tutorials/prototypes-in-javascript--net-24949">Prototypes in JavaScript</a><br>译者: Leeyw <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42244691/article/details/103650666">理解JavaScript中的原型链-Prototypes</a></p>
+</blockquote>
+<h2 id="Prototypes-in-JavaScript"><a href="#Prototypes-in-JavaScript" class="headerlink" title="Prototypes in JavaScript"></a>Prototypes in JavaScript</h2><ul>
+<li>JavaScript中的Prototypes</li>
+</ul>
+<h2 id="When-you-define-a-function-within-JavaScript-it-comes-with-a-few-pre-defined-properties-one-of-these-is-the-illusive-prototype-In-this-article-I’ll-detail-what-it-is-and-why-you-should-use-it-in-your-projects"><a href="#When-you-define-a-function-within-JavaScript-it-comes-with-a-few-pre-defined-properties-one-of-these-is-the-illusive-prototype-In-this-article-I’ll-detail-what-it-is-and-why-you-should-use-it-in-your-projects" class="headerlink" title="When you define a function within JavaScript, it comes with a few pre-defined properties; one of these is the illusive prototype. In this article, I’ll detail what it is, and why you should use it in your projects."></a>When you define a function within JavaScript, it comes with a few pre-defined properties; one of these is the illusive prototype. In this article, I’ll detail what it is, and why you should use it in your projects.</h2><ul>
+<li>当你在JavaScript中定义一个方法时，它(方法)会预设一些属性；其中之一就是让人迷惑的原型。在这篇文章中，我将详细解释它(原型链)是什么，你为何需要在您的项目中使用它。</li>
+</ul>
+<h2 id="What-is-Prototype"><a href="#What-is-Prototype" class="headerlink" title="What is Prototype?"></a>What is Prototype?</h2><ul>
+<li>原型是什么？</li>
+</ul>
+<h2 id="The-prototype-property-is-initially-an-empty-object-and-can-have-members-added-to-it-as-you-would-any-other-object"><a href="#The-prototype-property-is-initially-an-empty-object-and-can-have-members-added-to-it-as-you-would-any-other-object" class="headerlink" title="The prototype property is initially an empty object, and can have members added to it - as you would any other object."></a>The prototype property is initially an empty object, and can have members added to it - as you would any other object.</h2><ul>
+<li>原型中的属性最初是一个空的对象，而且能添加成员-就像你添加其他任何对象一样。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> myObject = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)</span>&#123;<br>    <span class="hljs-built_in">this</span>.name = name;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>&#125;;<br><br> <br><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> myObject.prototype); <span class="hljs-comment">// object</span><br> <br>myObject.prototype.getName = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.name;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="In-the-snippet-above-we’ve-created-a-function-but-if-we-call-myObject-it-will-simply-return-the-window-object-because-it-was-defined-within-the-global-scope-this-will-therefore-return-the-global-object-as-it-has-not-yet-been-instantiated-more-on-this-later"><a href="#In-the-snippet-above-we’ve-created-a-function-but-if-we-call-myObject-it-will-simply-return-the-window-object-because-it-was-defined-within-the-global-scope-this-will-therefore-return-the-global-object-as-it-has-not-yet-been-instantiated-more-on-this-later" class="headerlink" title="In the snippet above, we’ve created a function, but if we call myObject(), it will simply return the window object, because it was defined within the global scope. this will therefore return the global object, as it has not yet been instantiated (more on this later)."></a>In the snippet above, we’ve created a function, but if we call <code>myObject()</code>, it will simply return the <code>window</code> object, because it was defined within the global scope. <code>this</code> will therefore return the global object, as it has not yet been instantiated (more on this later).</h2><ul>
+<li>在上面的代码片段中，我们创建了一个方法，但如果我们调用 myObject() ,它将仅仅返回 window 对象，因为它是在全局作用域下的。this  也因此返回全局对象，因为它还没有实例化（稍后详细解释）。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log(myObject() === <span class="hljs-built_in">window</span>); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="The-Secret-Link"><a href="#The-Secret-Link" class="headerlink" title="The Secret Link"></a>The Secret Link</h2><ul>
+<li>“神秘”链<h2 id="Every-object-within-JavaScript-has-a-“secret”-property"><a href="#Every-object-within-JavaScript-has-a-“secret”-property" class="headerlink" title="Every object within JavaScript has a “secret” property."></a>Every object within JavaScript has a “secret” property.</h2></li>
+<li>在JavaScript中所有对象都有一个“神秘”链</li>
+</ul>
+<h2 id="Before-we-continue-I’d-like-to-discuss-the-“secret”-link-that-makes-prototype-work-the-way-it-does"><a href="#Before-we-continue-I’d-like-to-discuss-the-“secret”-link-that-makes-prototype-work-the-way-it-does" class="headerlink" title="Before we continue, I’d like to discuss the “secret” link that makes prototype work the way it does."></a>Before we continue, I’d like to discuss the “secret” link that makes prototype work the way it does.</h2><ul>
+<li>在我们继续了解之前，我想要先论述“secret”(“神秘”)链在原型中的作用。</li>
+</ul>
+<h2 id="The-proto-property-shouldn’t-be-confused-with-an-object’s-prototype-as-they-are-two-separate-properties-that-said-they-do-go-hand-in-hand-It’s-important-to-make-this-distinction-as-it-can-be-quite-confusing-at-first-What-does-this-mean-exactly-Let-me-explain-When-we-created-the-myObject-function-we-were-defining-an-object-of-type-Function"><a href="#The-proto-property-shouldn’t-be-confused-with-an-object’s-prototype-as-they-are-two-separate-properties-that-said-they-do-go-hand-in-hand-It’s-important-to-make-this-distinction-as-it-can-be-quite-confusing-at-first-What-does-this-mean-exactly-Let-me-explain-When-we-created-the-myObject-function-we-were-defining-an-object-of-type-Function" class="headerlink" title="The __proto__ property shouldn’t be confused with an object’s prototype, as they are two separate properties; that said, they do go hand in hand. It’s important to make this distinction, as it can be quite confusing at first! What does this mean exactly? Let me explain. When we created the myObject function, we were defining an object of type Function."></a>The <code><code>__proto__</code></code> property shouldn’t be confused with an object’s prototype, as they are two separate properties; that said, they do go hand in hand. It’s important to make this distinction, as it can be quite confusing at first! What does this mean exactly? Let me explain. When we created the <code>myObject</code> function, we were defining an object of type <code>Function</code>.</h2><ul>
+<li><p>(__proto__属性) ≠ (对象中的 prototype属性)，事实上它们是两个单独的属性；即便如此，它们也go hand in hand（携手并进，一荣俱荣..）。重要的是把它们两个区别开(并不同属)，因为第一次接触它们两个属性会让你混淆！准确的说是什么意思呢？让我解释一下。当我们创建myObject方法时，我们是定义了一个类型为 Function 的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> myObject); <span class="hljs-comment">// function</span><br></code></pre></td></tr></table></figure>
+<h2 id="For-those-unaware-Function-is-a-predefined-object-in-JavaScript-and-as-a-result-has-its-own-properties-e-g-length-and-arguments-and-methods-e-g-call-and-apply-And-yes-it-too-has-its-own-prototype-object-as-well-as-the-secret-proto-link-This-means-that-somewhere-within-the-JavaScript-engine-there-is-a-bit-of-code-that-could-be-similar-to-the-following"><a href="#For-those-unaware-Function-is-a-predefined-object-in-JavaScript-and-as-a-result-has-its-own-properties-e-g-length-and-arguments-and-methods-e-g-call-and-apply-And-yes-it-too-has-its-own-prototype-object-as-well-as-the-secret-proto-link-This-means-that-somewhere-within-the-JavaScript-engine-there-is-a-bit-of-code-that-could-be-similar-to-the-following" class="headerlink" title="For those unaware, Function is a predefined object in JavaScript, and, as a result, has its own properties (e.g. length and arguments) and methods (e.g. call and apply). And yes, it, too, has its own prototype object, as well as the secret __proto__ link. This means that, somewhere within the JavaScript engine, there is a bit of code that could be similar to the following:"></a>For those unaware, <code>Function</code> is a predefined object in JavaScript, and, as a result, has its own properties (e.g. <code>length</code> and <code>arguments</code>) and methods (e.g. <code>call</code> and <code>apply</code>). And yes, it, too, has its own prototype object, as well as the secret <code><code>__proto__</code></code> link. This means that, somewhere within the JavaScript engine, there is a bit of code that could be similar to the following:</h2></li>
+<li><p>对于那些未知的，在JavaScript中 Function 是一个预定义的对象，并且，其结果是，他们都有自己的属性(例如 length   和 arguments) 和方法 (例如. call  和 apply)，是的，它也有自己的原型对象，和 “神秘”的<code>__proto__ </code>链一样。这是什么意思呢。在JavaScript engine的某个地方，有一些代码，可能类似于下面的代码块：</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">Function</span>.prototype = &#123;<br>  <span class="hljs-built_in">arguments</span>: <span class="hljs-literal">null</span>,<br>  length: <span class="hljs-number">0</span>,<br>  call: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>      <span class="hljs-comment">// secret code</span><br>  &#125;,<br>  apply: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>      <span class="hljs-comment">// secret code</span><br>  &#125;<br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="In-truth-it-probably-wouldn’t-be-quite-so-simplistic-this-is-merely-to-illustrate-how-the-prototype-chain-works"><a href="#In-truth-it-probably-wouldn’t-be-quite-so-simplistic-this-is-merely-to-illustrate-how-the-prototype-chain-works" class="headerlink" title="In truth, it probably wouldn’t be quite so simplistic; this is merely to illustrate how the prototype chain works."></a>In truth, it probably wouldn’t be quite so simplistic; this is merely to illustrate how the prototype chain works.</h2><ul>
+<li>实际上，它可能不会这么简单；）；这仅仅是为了说明(prototype chain)原型链是如何工作的</li>
+</ul>
+<h2 id="So-we-have-defined-myObject-as-a-function-and-given-it-one-argument-name-but-we-never-set-any-properties-such-as-length-or-methods-such-as-call-So-why-does-the-following-work"><a href="#So-we-have-defined-myObject-as-a-function-and-given-it-one-argument-name-but-we-never-set-any-properties-such-as-length-or-methods-such-as-call-So-why-does-the-following-work" class="headerlink" title="So we have defined myObject as a function and given it one argument, name; but we never set any properties, such as length or methods, such as call. So why does the following work?"></a>So we have defined myObject as a function and given it one argument, name; but we never set any properties, such as length or methods, such as call. So why does the following work?</h2><ul>
+<li>因此我们定义了一个方法 myObject  并给他一个参数， name ；但是我们从未设置过任何属性，诸如  length 或者方法，诸如 call 。所以为什么下面(code)会执行呢？<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">myObject</span>(<span class="hljs-params">sdadas</span>) </span>&#123;<br>     <br>&#125;<br><span class="hljs-built_in">console</span>.log(myObject.length);<span class="hljs-comment">// 1(being the amount of available arguments)</span><br><span class="hljs-comment">// （存在于这个方法的参数的数量）</span><br></code></pre></td></tr></table></figure>
+<h2 id="This-is-because-when-we-defined-myObject-it-created-a-proto-property-and-set-its-value-to-Function-prototype-illustrated-in-the-code-above-So-when-we-access-myObject-length-it-looks-for-a-property-of-myObject-called-length-and-doesn’t-find-one-it-then-travels-up-the-chain-via-the-proto-link-finds-the-property-and-returns-it"><a href="#This-is-because-when-we-defined-myObject-it-created-a-proto-property-and-set-its-value-to-Function-prototype-illustrated-in-the-code-above-So-when-we-access-myObject-length-it-looks-for-a-property-of-myObject-called-length-and-doesn’t-find-one-it-then-travels-up-the-chain-via-the-proto-link-finds-the-property-and-returns-it" class="headerlink" title="This is because, when we defined myObject, it created a  __proto__ property and set its value to  Function.prototype (illustrated in the code above). So, when we access  myObject.length, it looks for a property of  myObject called  length and doesn’t find one; it then travels up the chain, via the  __proto__ link, finds the property and returns it."></a>This is because, when we defined <code>myObject</code>, it created a  <code><code>__proto__</code></code> property and set its value to  <code>Function.prototype</code> (illustrated in the code above). So, when we access  <code>myObject.length</code>, it looks for a property of  <code>myObject</code> called  <code>length</code> and doesn’t find one; it then travels up the chain, via the  <code><code>__proto__ link</code></code>, finds the property and returns it.</h2></li>
+<li>这是因为，我们在定义 myObject 时，它创建了一个 <code>__proto__</code> 属性并设置了它自身的值为 Function.prototype （以上面的代码中作为例证）。因此，我们调用 myObject.length  时，会在 myObject  的属性中寻找 length 但没有找到；然后向上查询原型链(中的length方法), 通过 <code>__proto__ link</code> ，寻找属性(length)并返回它。</li>
+</ul>
+<h2 id="You-might-be-wondering-why-length-is-set-to-1-and-not-0-or-any-other-number-for-that-fact-This-is-because-myObject-is-in-fact-an-instance-of-Function"><a href="#You-might-be-wondering-why-length-is-set-to-1-and-not-0-or-any-other-number-for-that-fact-This-is-because-myObject-is-in-fact-an-instance-of-Function" class="headerlink" title="You might be wondering why length is set to 1 and not 0 - or any other number for that fact. This is because myObject is in fact an instance of Function."></a>You might be wondering why <code>length</code> is set to <code>1</code> and not <code>0</code> - or any other number for that fact. This is because <code>myObject</code> is in fact an instance of <code>Function</code>.</h2><ul>
+<li>你也许想知道为什么 length  中设置为 1 而非 0 —— 或其他任何数值（对于这个结果来说）。这是因为 myObject 事实上是 Function 的一个实例化对象。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(myObject <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Function</span>); <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.log(myObject === <span class="hljs-built_in">Function</span>); <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+<h2 id="When-an-instance-of-an-object-is-created-the-proto-property-is-updated-to-point-to-the-constructor’s-prototype-which-in-this-case-is-Function"><a href="#When-an-instance-of-an-object-is-created-the-proto-property-is-updated-to-point-to-the-constructor’s-prototype-which-in-this-case-is-Function" class="headerlink" title="When an instance of an object is created, the __proto__ property is updated to point to the constructor’s prototype, which, in this case, is Function."></a>When an instance of an object is created, the <code>__proto__</code> property is updated to point to the constructor’s prototype, which, in this case, is <code>Function</code>.</h2></li>
+<li>我们在创建一个实例化对象时，  <strong>proto</strong> 属性的(内容)更新是因为原型的构造函数，至此，为 Function 。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(myObject.__proto__ === <span class="hljs-built_in">Function</span>.prototype) <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+<h2 id="Additionally-when-you-create-a-new-Function-object-the-native-code-inside-the-Function-constructor-will-count-the-number-of-arguments-and-update-this-length-accordingly-which-in-this-case-is-1"><a href="#Additionally-when-you-create-a-new-Function-object-the-native-code-inside-the-Function-constructor-will-count-the-number-of-arguments-and-update-this-length-accordingly-which-in-this-case-is-1" class="headerlink" title="Additionally, when you create a new Function object, the native code inside the Function constructor will count the number of arguments and update this.length accordingly, which, in this case, is 1."></a>Additionally, when you create a new <code>Function</code> object, the native code inside the <code>Function</code> constructor will count the number of arguments and update <code>this.length</code> accordingly, which, in this case, is <code>1</code>.</h2></li>
+<li>加之，我们在创建一个（实例化）新 Function  的对象时， Function 构造函数中的代码将计算参数数量并相应的更新 this.length  。至此，为  1 <h2 id="If-however-we-create-a-new-instance-of-myObject-using-the-new-keyword-proto-will-point-to-myObject-prototype-as-myObject-is-the-constructor-of-our-new-instance"><a href="#If-however-we-create-a-new-instance-of-myObject-using-the-new-keyword-proto-will-point-to-myObject-prototype-as-myObject-is-the-constructor-of-our-new-instance" class="headerlink" title="If, however, we create a new instance of myObject using the new keyword, __proto__ will point to myObject.prototype as myObject is the constructor of our new instance."></a>If, however, we create a new instance of <code>myObject</code> using the <code>new</code> keyword,<code> __proto__ </code>will point to <code>myObject.prototype</code> as <code>myObject</code> is the constructor of our new instance.</h2></li>
+<li>然而，如果，我们创建一个新的myObject 的实例化  使用 new 关键词，（新实例化对象的）<code>__proto__</code>  会指向 myObject 的 myObject .prototype 的构造函数（的返回内容）。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> myInstance = <span class="hljs-keyword">new</span> myObject(“foo”);<br><span class="hljs-built_in">console</span>.log(myInstance.__proto__ === myObject.prototype); <span class="hljs-comment">// true</span><br></code></pre></td></tr></table></figure>
+<h2 id="In-addition-to-having-access-to-the-native-methods-within-the-Function-prototype-such-as-call-and-apply-we-now-have-access-to-myObject’s-method-getName"><a href="#In-addition-to-having-access-to-the-native-methods-within-the-Function-prototype-such-as-call-and-apply-we-now-have-access-to-myObject’s-method-getName" class="headerlink" title="In addition to having access to the native methods within the Function.prototype, such as call and apply, we now have access to myObject’s method, getName"></a>In addition to having access to the native methods within the <code>Function.prototype</code>, such as <code>call</code> and <code>apply</code>, we now have access to <code>myObject</code>’s method, <code>getName</code></h2></li>
+<li> 除了访问 Function .prototype 的原生方法外，诸如  call  和 apply ，我们还能访问 myObject 的方法，getName()。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(myInstance.getName()); <span class="hljs-comment">// foo</span><br> <br><span class="hljs-keyword">var</span> mySecondInstance = <span class="hljs-keyword">new</span> myObject(“bar”);<br> <br><span class="hljs-built_in">console</span>.log(mySecondInstance.getName()); <span class="hljs-comment">// bar</span><br><span class="hljs-built_in">console</span>.log(myInstance.getName()); <span class="hljs-comment">// foo</span><br></code></pre></td></tr></table></figure>
+<h2 id="As-you-can-imagine-this-is-quite-handy-as-it-can-be-used-to-blueprint-an-object-and-create-as-many-instances-as-needed-which-leads-me-onto-the-next-topic"><a href="#As-you-can-imagine-this-is-quite-handy-as-it-can-be-used-to-blueprint-an-object-and-create-as-many-instances-as-needed-which-leads-me-onto-the-next-topic" class="headerlink" title="As you can imagine, this is quite handy, as it can be used to blueprint an object, and create as many instances as needed - which leads me onto the next topic!"></a>As you can imagine, this is quite handy, as it can be used to blueprint an object, and create as many instances as needed - which leads me onto the next topic!</h2></li>
+<li>正如你想的那样，这非常方便，因为它可以 blueprint（绘制） 一个对象（的蓝图）。<h2 id="Why-is-Using-Prototype-Better"><a href="#Why-is-Using-Prototype-Better" class="headerlink" title="Why is Using Prototype Better?"></a>Why is Using Prototype Better?</h2></li>
+<li>为什么使用原型更好？</li>
+</ul>
+<h2 id="Say-for-instance-that-we-are-developing-a-canvas-game-and-need-several-possibly-hundreds-of-objects-on-the-screen-at-once-Each-object-requires-its-own-properties-such-as-x-and-y-coordinates-width-height-and-many-others"><a href="#Say-for-instance-that-we-are-developing-a-canvas-game-and-need-several-possibly-hundreds-of-objects-on-the-screen-at-once-Each-object-requires-its-own-properties-such-as-x-and-y-coordinates-width-height-and-many-others" class="headerlink" title="Say, for instance, that we are developing a canvas game and need several (possibly hundreds of) objects on the screen at once. Each object requires its own properties, such as x and y coordinates, width,height, and many others."></a>Say, for instance, that we are developing a canvas game and need several (possibly hundreds of) objects on the screen at once. Each object requires its own properties, such as <code>x</code> and <code>y</code> coordinates, width,height, and many others.</h2><ul>
+<li>说，例如，我们在开发一款 canvas 的游戏并且需要几个（可能数以百计）对象在屏幕上，每个对象都需要有自己的属性，诸如 x 和 y  的坐标，<code>width</code>,<code>height</code>  和其它更多属性。<h2 id="We-might-do-it-as-follows："><a href="#We-might-do-it-as-follows：" class="headerlink" title="We might do it as follows："></a>We might do it as follows：</h2></li>
+<li>我们可以这样做，如下：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> GameObject1 = &#123;<br>    x: <span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * myCanvasWidth) + <span class="hljs-number">1</span>),<br>    y: <span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * myCanvasHeight) + <span class="hljs-number">1</span>),<br>    width: <span class="hljs-number">10</span>,<br>    height: <span class="hljs-number">10</span>,<br>    draw: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        myCanvasContext.fillRect(<span class="hljs-built_in">this</span>.x, <span class="hljs-built_in">this</span>.y, <span class="hljs-built_in">this</span>.width, <span class="hljs-built_in">this</span>.height);<br>    &#125;<br>   ...<br>&#125;;<br> <br><span class="hljs-keyword">var</span> GameObject2 = &#123;<br>    x: <span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * myCanvasWidth) + <span class="hljs-number">1</span>),<br>    y: <span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * myCanvasHeight) + <span class="hljs-number">1</span>),<br>    width: <span class="hljs-number">10</span>,<br>    height: <span class="hljs-number">10</span>,<br>    draw: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;<br>        myCanvasContext.fillRect(<span class="hljs-built_in">this</span>.x, <span class="hljs-built_in">this</span>.y, <span class="hljs-built_in">this</span>.width, <span class="hljs-built_in">this</span>.height);<br>    &#125;<br>    ...<br></code></pre></td></tr></table></figure>
+<h2 id="…-do-this-98-more-times-…"><a href="#…-do-this-98-more-times-…" class="headerlink" title="… do this 98 more times …"></a>… do this 98 more times …</h2></li>
+<li>…这样做98次…<h2 id="What-this-will-do-is-create-all-these-objects-within-memory-all-with-separate-definitions-for-methods-such-as-draw-and-whatever-other-methods-may-be-required-This-is-certainly-not-ideal-as-the-game-will-bloat-the-browsers-allocated-JavaScript-memory-and-make-it-run-very-slowly…-or-even-stop-responding"><a href="#What-this-will-do-is-create-all-these-objects-within-memory-all-with-separate-definitions-for-methods-such-as-draw-and-whatever-other-methods-may-be-required-This-is-certainly-not-ideal-as-the-game-will-bloat-the-browsers-allocated-JavaScript-memory-and-make-it-run-very-slowly…-or-even-stop-responding" class="headerlink" title="What this will do is create all these objects within memory - all with separate definitions for methods, such as draw and whatever other methods may be required. This is certainly not ideal, as the game will bloat the browsers allocated JavaScript memory, and make it run very slowly… or even stop responding."></a>What this will do is create all these objects within memory - all with separate definitions for methods, such as <code>draw</code> and whatever other methods may be required. This is certainly not ideal, as the game will bloat the browsers allocated JavaScript memory, and make it run very slowly… or even stop responding.</h2></li>
+<li>我们所有创建的对象都放在内存中——所有单独定义的方法，诸如 draw 和可能需要的其他方法。但这并不理想，因为游戏会膨胀浏览器分配给JavaScript的内存，这让它运行的非常缓慢…甚至停止响应。<h2 id="While-this-probably-wouldn’t-happen-with-only-100-objects-it-still-can-serve-to-be-quite-a-performance-hit-as-it-will-need-to-look-up-one-hundred-different-objects-rather-than-just-the-single-prototype-object"><a href="#While-this-probably-wouldn’t-happen-with-only-100-objects-it-still-can-serve-to-be-quite-a-performance-hit-as-it-will-need-to-look-up-one-hundred-different-objects-rather-than-just-the-single-prototype-object" class="headerlink" title="While this probably wouldn’t happen with only 100 objects, it still can serve to be quite a performance hit, as it will need to look up one hundred different objects, rather than just the single prototype object."></a>While this probably wouldn’t happen with only 100 objects, it still can serve to be quite a performance hit, as it will need to look up one hundred different objects, rather than just the single <code>prototype</code> object.</h2></li>
+<li>虽然这种情况大概不会发生——只有100个对象；），但他仍然能带来一定的性能影响，因为它会访问100个不同的对象，而不是只有一个 prototype 对象。<h2 id="How-to-Use-Prototype"><a href="#How-to-Use-Prototype" class="headerlink" title="How to Use Prototype"></a>How to Use Prototype</h2>` 怎么使用原型<h3 id="To-make-the-application-run-faster-and-follow-best-practices-we-can-re-define-the-prototype-property-of-the-GameObject-every-instance-of-GameObject-will-then-reference-the-methods-within-GameObject-prototype-as-if-they-were-their-own-methods"><a href="#To-make-the-application-run-faster-and-follow-best-practices-we-can-re-define-the-prototype-property-of-the-GameObject-every-instance-of-GameObject-will-then-reference-the-methods-within-GameObject-prototype-as-if-they-were-their-own-methods" class="headerlink" title="To make the application run faster (and follow best practices), we can (re)define the prototype property of the GameObject; every instance of GameObject will then reference the methods within GameObject.prototype as if they were their own methods."></a>To make the application run faster (and follow best practices), we can (re)define the prototype property of the <code>GameObject</code>; every instance of <code>GameObject</code> will then reference the methods within <code>GameObject.prototype</code> as if they were their own methods.</h3></li>
+<li>让应用程序运行的更快（并且遵循最优实践方式），我们能（重新）定义 GameObject 的prototype属性；每个GameObject  的实例在 GameObject.prototype 引用的方法都和使用它自身的方法别无二样。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// define the GameObject constructor function</span><br><span class="hljs-comment">// 定义GameObject 的构造方法</span><br><span class="hljs-keyword">var</span> GameObject = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">width, height</span>) </span>&#123;<br>    <span class="hljs-built_in">this</span>.x = <span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * myCanvasWidth) + <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">this</span>.y = <span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * myCanvasHeight) + <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">this</span>.width = width;<br>    <span class="hljs-built_in">this</span>.height = height;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>;<br>&#125;;<br> <br><span class="hljs-comment">// (re)define the GameObject prototype object</span><br><span class="hljs-comment">// （重新）定义GameObject的原型对象</span><br>GameObject.prototype = &#123;<br>    x: <span class="hljs-number">0</span>,<br>    y: <span class="hljs-number">0</span>,<br>    width: <span class="hljs-number">5</span>,<br>    width: <span class="hljs-number">5</span>,<br>    draw: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        myCanvasContext.fillRect(<span class="hljs-built_in">this</span>.x, <span class="hljs-built_in">this</span>.y, <span class="hljs-built_in">this</span>.width, <span class="hljs-built_in">this</span>.height);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="We-can-then-instantiate-the-GameObject-100-times"><a href="#We-can-then-instantiate-the-GameObject-100-times" class="headerlink" title="We can then instantiate the GameObject 100 times."></a>We can then instantiate the GameObject 100 times.</h2></li>
+<li>于是，我们能（轻松的）实例化100个GameObject对象<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> x = <span class="hljs-number">100</span>,<br>arrayOfGameObjects = [];<br> <br><span class="hljs-keyword">do</span> &#123;<br>    arrayOfGameObjects.push(<span class="hljs-keyword">new</span> GameObject(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>));<br>&#125; <span class="hljs-keyword">while</span>(x--);<br></code></pre></td></tr></table></figure>
+<h2 id="Now-we-have-an-array-of-100-GameObjects-which-all-share-the-same-prototype-and-definition-of-the-draw-method-which-drastically-saves-memory-within-the-application"><a href="#Now-we-have-an-array-of-100-GameObjects-which-all-share-the-same-prototype-and-definition-of-the-draw-method-which-drastically-saves-memory-within-the-application" class="headerlink" title="Now we have an array of 100 GameObjects, which all share the same prototype and definition of the draw method, which drastically saves memory within the application."></a>Now we have an array of 100 GameObjects, which all share the same prototype and definition of the <code>draw</code> method, which drastically saves memory within the application.</h2></li>
+<li>现在我们有了一个有100个GameObject对象元素的数组，它们都共享同一个prototype并且定义了 draw 方法，这大大节省了项目所使用的内存。</li>
+</ul>
+<h2 id="When-we-call-the-draw-method-it-will-reference-the-exact-same-function"><a href="#When-we-call-the-draw-method-it-will-reference-the-exact-same-function" class="headerlink" title="When we call the draw method, it will reference the exact same function."></a>When we call the <code>draw</code> method, it will reference the exact same function.</h2><ul>
+<li>当我们调用 draw 方法时，他将引用相同的方法。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br><span class="hljs-keyword">var</span> GameLoop = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">for</span>(gameObject <span class="hljs-keyword">in</span> arrayOfGameObjects) &#123;<br>        gameObject.draw();<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="Prototype-is-a-Live-Object"><a href="#Prototype-is-a-Live-Object" class="headerlink" title="Prototype is a Live Object"></a>Prototype is a Live Object</h2></li>
+<li>Prototype 是一个 Live 对象<h2 id="An-object’s-prototype-is-a-live-object-so-to-speak-This-simply-means-that-if-after-we-create-all-our-GameObject-instances-we-decide-that-instead-of-drawing-a-rectangle-we-want-to-draw-a-circle-we-can-update-our-GameObject-prototype-draw-method-accordingly"><a href="#An-object’s-prototype-is-a-live-object-so-to-speak-This-simply-means-that-if-after-we-create-all-our-GameObject-instances-we-decide-that-instead-of-drawing-a-rectangle-we-want-to-draw-a-circle-we-can-update-our-GameObject-prototype-draw-method-accordingly" class="headerlink" title="An object’s prototype is a live object, so to speak. This simply means that, if, after we create all our GameObject instances, we decide that, instead of drawing a rectangle, we want to draw a circle, we can update our GameObject.prototype.draw method accordingly."></a>An object’s prototype is a live object, so to speak. This simply means that, if, after we create all our GameObject instances, we decide that, instead of drawing a rectangle, we want to draw a circle, we can update our <code>GameObject.prototype.draw</code> method accordingly.</h2></li>
+<li>对象的prototype是一个 Live 对象，可以说。这就意味着，如果，我们创建所有的GameObject实例化对象之后，我们决定，不是绘制一个矩形，我们想绘制一个圆形。因此我们能更新我们的GameObject.prototype.draw 方法。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">GameObject.prototype.draw = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    myCanvasContext.arc(<span class="hljs-built_in">this</span>.x, <span class="hljs-built_in">this</span>.y, <span class="hljs-built_in">this</span>.width, <span class="hljs-number">0</span>, <span class="hljs-built_in">Math</span>.PI*<span class="hljs-number">2</span>, <span class="hljs-literal">true</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="And-now-all-the-previous-instances-of-GameObject-and-any-future-instances-will-draw-a-circle"><a href="#And-now-all-the-previous-instances-of-GameObject-and-any-future-instances-will-draw-a-circle" class="headerlink" title="And now, all the previous instances of GameObject and any future instances will draw a circle."></a>And now, all the previous instances of <code>GameObject</code> and any future instances will draw a circle.</h2></li>
+<li>至此，所有以前实例化 GameObject  对象和未来将要实例化 GameObject  对象都将绘制圆。<h2 id="Updating-Native-Objects-Prototypes"><a href="#Updating-Native-Objects-Prototypes" class="headerlink" title="Updating Native Objects Prototypes"></a>Updating Native Objects Prototypes</h2></li>
+<li>更新对象原型（自身）<h2 id="Yes-this-is-possible-You-may-be-familiar-with-JavaScript-libraries-such-as-Prototype-which-take-advantage-of-this-method"><a href="#Yes-this-is-possible-You-may-be-familiar-with-JavaScript-libraries-such-as-Prototype-which-take-advantage-of-this-method" class="headerlink" title="Yes, this is possible. You may be familiar with JavaScript libraries, such as Prototype, which take advantage of this method."></a>Yes, this is possible. You may be familiar with JavaScript libraries, such as <code>Prototype</code>, which take advantage of this method.</h2></li>
+<li>是的，这是有可能的。你或许熟悉JavaScript库，诸如Prototype，利用这个方法(prototype)(更新原型)。<h2 id="Let’s-use-a-simple-example"><a href="#Let’s-use-a-simple-example" class="headerlink" title="Let’s use a simple example:"></a>Let’s use a simple example:</h2></li>
+<li>让我们举一个简单的例子：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-built_in">String</span>.prototype.trim = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.replace(<span class="hljs-regexp">/^\s+|\s+$/g</span>, ‘’);<br>&#125;;<br><span class="hljs-comment">// tips: 以上正则表达式为替换所有(全局)开头为1个或n个空白字符组成或结尾为1个或多个空白字符组成的字符串替换成&#x27;&#x27;（空字符串）</span><br></code></pre></td></tr></table></figure>
+<h2 id="We-can-now-access-this-as-a-method-of-any-string"><a href="#We-can-now-access-this-as-a-method-of-any-string" class="headerlink" title="We can now access this as a method of any string:"></a>We can now access this as a method of any string:</h2></li>
+<li>我们现在能访问字符串（String）的这个方法：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript">“ foo bar   “.trim(); <span class="hljs-comment">// “foo bar”</span><br></code></pre></td></tr></table></figure>
+<h2 id="There-is-a-minor-downside-to-this-however-For-example-you-may-use-this-in-your-application-but-a-year-or-two-down-the-road-a-browser-may-implement-an-updated-version-of-JavaScript-that-includes-a-native-trim-method-within-the-String‘s-prototype-This-means-that-your-definition-of-trim-will-override-the-native-version-Yikes-To-overcome-this-we-can-add-a-simple-check-before-defining-the-function"><a href="#There-is-a-minor-downside-to-this-however-For-example-you-may-use-this-in-your-application-but-a-year-or-two-down-the-road-a-browser-may-implement-an-updated-version-of-JavaScript-that-includes-a-native-trim-method-within-the-String‘s-prototype-This-means-that-your-definition-of-trim-will-override-the-native-version-Yikes-To-overcome-this-we-can-add-a-simple-check-before-defining-the-function" class="headerlink" title="There is a minor downside to this, however. For example, you may use this in your application; but a year or two down the road, a browser may implement an updated version of JavaScript that includes a native trim method within the String‘s prototype. This means that your definition of trim will override the native version! Yikes! To overcome this, we can add a simple check before defining the function."></a>There is a minor downside to this, however. For example, you may use this in your application; but a year or two down the road, a browser may implement an updated version of JavaScript that includes a native <code>trim</code> method within the <code>String</code>‘s prototype. This means that your definition of <code>trim</code> will override the native version! Yikes! To overcome this, we can add a simple check before defining the function.</h2></li>
+<li>这儿有一个小缺点，无论怎样，例如，你可以在你的应用程序中使用它；但一两年过后，浏览器可能会更新JavaScript的新版本，这其中或许就包括String’s原型中的 trim 方法。这意味着重定义的 trim 将会覆盖你本地的版本！ 可恶！ 咱们得克服它，我们能添加一个简单的方法：检查之前定义的函数：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><br><span class="hljs-keyword">if</span>(!<span class="hljs-built_in">String</span>.prototype.trim) &#123;<br>    <span class="hljs-built_in">String</span>.prototype.trim = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.replace(<span class="hljs-regexp">/^\s+|\s+$/g</span>, ‘’);<br>    &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="Now-if-it-exists-it-will-use-the-native-version-of-the-trim-method"><a href="#Now-if-it-exists-it-will-use-the-native-version-of-the-trim-method" class="headerlink" title="Now, if it exists, it will use the native version of the trim method."></a>Now, if it exists, it will use the native version of the <code>trim</code> method.</h2></li>
+<li>现在，如果它存在，它将使用本地的trim  方法。<h2 id="As-a-rule-of-thumb-it’s-generally-considered-a-best-practice-to-avoid-extending-native-objects-But-as-with-anything-rules-can-be-broken-if-needed"><a href="#As-a-rule-of-thumb-it’s-generally-considered-a-best-practice-to-avoid-extending-native-objects-But-as-with-anything-rules-can-be-broken-if-needed" class="headerlink" title="As a rule of thumb, it’s generally considered a best practice to avoid extending native objects. But, as with anything, rules can be broken, if needed."></a>As a rule of thumb, it’s generally considered a best practice to avoid extending native objects. But, as with anything, rules can be broken, if needed.</h2></li>
+<li>一般来说，这种方法通常被认为是最佳实践方式，避免重新声明本机对象（已有）。但是，都一样，规则可以被打破，如果有必要的话。<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2></li>
+<li>结论<h2 id="Hopefully-this-article-has-shed-some-light-on-the-backbone-of-JavaScript-that-is-prototype-You-should-now-be-on-your-way-to-creating-more-efficient-applications"><a href="#Hopefully-this-article-has-shed-some-light-on-the-backbone-of-JavaScript-that-is-prototype-You-should-now-be-on-your-way-to-creating-more-efficient-applications" class="headerlink" title="Hopefully, this article has shed some light on the backbone of JavaScript that is prototype. You should now be on your way to creating more efficient applications."></a>Hopefully, this article has shed some light on the backbone of JavaScript that is prototype. You should now be on your way to creating more efficient applications.</h2></li>
+<li>希望，这篇文章解释清楚了JavaScript的骨干prototype。你现在应该创建更加高效的应用程序。<h2 id="If-you-have-any-questions-regarding-prototype-let-me-know-in-the-comments-and-I’ll-do-my-best-to-answer-them"><a href="#If-you-have-any-questions-regarding-prototype-let-me-know-in-the-comments-and-I’ll-do-my-best-to-answer-them" class="headerlink" title="If you have any questions regarding prototype, let me know in the comments, and I’ll do my best to answer them."></a>If you have any questions regarding prototype, let me know in the comments, and I’ll do my best to answer them.</h2></li>
+<li>如果你有关于原型的任何问题，在评论区让我知道，我会知无不言言无不尽。</li>
+</ul>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">#笔记</a></li></ul>
+      </section>
+
+      <section class="comment">
+        
+  
+  
+
+  
+  
+
+    <div style="text-align:center;">
+      <button class="btncomment" id="load-disqus" onclick="disqus.load();">
+        加载Disqus
+      </button>
+    </div>
+    <div class="disqus-container">
+
+      <p id="disqus_error" class="disqus-error" style="display: none;">如果你看不到评论，那么就真的看不到评论 w(゜Д゜)w 或者针对 disq.us | disquscdn.com | disqus.com 启用代理</p>
+      <div id="disqus_thread" class="disqus-thread">
+
+      </div>
+    </div>
+  
+
+
+      </section>
+      <section class="article-navs">
+        
+  <nav class="card-container card-article-nav">
+    <div class="card-list">
+      
+      
+        <div id="article-nav-older" class="card-item img">
+          <article>
+            
+              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/images/WindowsLinux.jpg)"></div>
+            
+            <a class="card-link article-nav-link" href="/posts/4757.html"></a>
+            <strong class="article-nav-caption">Older</strong>
+            <p class="article-nav-title">
+              
+                Windows环境下配置Linux子系统
+              
+            </p>
+          </article>
+        </div>
+      
+    </div>
+  </nav>
+  
+      </section>
+
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+    <div class="footer-container">
+
+        <p>&copy; 2021 <a href="/" target="_blank">waterhydroxyl</a></p>
+
+        
+
+
+        <div style="width:300px;margin:0 auto; padding:20px 0;">
+            <a target="_blank" href="https://beian.miit.gov.cn"
+               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">桂ICP备17007944号</p></a>
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45048102000081"
+               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="https://cloud.ilikestudy.cn/index/beian.png"
+                                                                                                    style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">桂公网安备
+                    45048102000081号</p></a>
+
+        </div>
+        <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a
+                    href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a>
+        </p>
+
+
+        <!--
+        <div class="footer-container__texts">
+          <p>ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ｀ヽ、ヽ｀、ヽ｀｀、ヽ、｀｀、、ヽ｀ヽ、｀｀、、ヽ｀ヽ、｀ヽ、｀ヽ、｀ヽ</p>
+          <p>｀、ヽ｀｀、ヽ、｀｀｀、｀、ヽ🌙｀｀、｀ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、ヽ｀｀、｀ヽ、｀</p>
+          <p>｀、｀｀、｀、ヽ｀｀、、ヽヽ｀、｀ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、、、ヽヽ、｀｀、、ヽ｀、ヽ｀｀、ヽ｀ヽ｀</p>
+          <p>ヽ｀、｀｀、｀、ヽ｀｀、、ヽヽ｀、｀、、ヽヽ、｀Time waits for on one 🍓｀、、ヽ｀、ヽ｀｀、ヽ｀ヽ｀</p>
+          <p>｀ヽ｀｀、ヽ｀ヽ｀、、ヽ｀ヽ｀ヽ｀ヽ、ヽ｀、ヽ｀｀、ヽ、｀｀、、ヽ｀ヽ、｀｀、、ヽ｀ヽ、｀ヽ、｀ヽ、｀ヽ</p>
+        </div>
+        -->
+    </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+  <!-- disqus 评论 start -->
+  <script type="text/javascript">
+    /*
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+
+    /*
+      var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+    */
+    var disqus = {
+      load : function (){
+        (function() {
+      var d = document, s = d.createElement('script'), c = d.querySelector(".disqus-container");
+      if (!c) return;
+      s.src = 'https://waterhydroxyl.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      s.onerror = () => {
+        let t = document.querySelector("#disqus_error");
+        t.style.display = "block";
+      }
+      (d.head || d.body).appendChild(s);
+    })();
+        $('#load-disqus').remove();    //插入这一行代码 (3/5)
+      }    //插入这一行代码 (4/5)
+    }    //插入这一行代码 (5/5)
+  </script>
+  <!-- disqus 评论 end -->
+  
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        let params = {
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        }
+        if (el.dataset.lrc) {
+          params['lrcType'] = 3
+        }
+        new APlayer(params);
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>
