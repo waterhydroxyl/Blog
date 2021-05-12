@@ -162,6 +162,20 @@
               </a>
             </figure>
           
+            <figure class="bookmark-card">
+              <a class="bookmark-container" target="_blank" title="Loneliness" href="https://www.dingshiyi.top">
+                <div class="bookmark-content">
+                  <div class="bookmark-name">Loneliness</div>
+                  <div class="bookmark-link">https://www.dingshiyi.top</div>
+                </div>
+                
+                  <div class="bookmark-cover">
+                    <img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/avat.jpg" alt="Loneliness" />
+                  </div>
+                
+              </a>
+            </figure>
+          
         </div>
       </div>
     </article>
@@ -220,39 +234,30 @@
 
   
   
+<!-- valine 评论 start -->
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+var valine = {
+  load : function (){
+    new Valine({
+      el: "#valine_thread",
+      appId: "zjaMrOldHVTEwok7EMDdN6BA-gzGzoHsz",
+      appKey: "mLKMWJ14HMdRehmCM5fH4hYE",
+      avatar: "monsterid",
+      placeholder: "随便说点什么叭～",
+      notify: true,
+      visitor: true,
+      pageSize: 10,
+    });
+    let addBtn = document.querySelector("#load-valine")
+    addBtn.remove();
+ }    //插入这一行代码 (4/5)
+    }  
+</script>
+<!-- valine 评论 end -->
 
-  <!-- disqus 评论 start -->
-  <script type="text/javascript">
-    /*
-     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-     */
 
-    /*
-      var disqus_config = function () {
-        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      };
-    */
-    var disqus = {
-      load : function (){
-        (function() {
-      var d = document, s = d.createElement('script'), c = d.querySelector(".disqus-container");
-      if (!c) return;
-      s.src = 'https://waterhydroxyl.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      s.onerror = () => {
-        let t = document.querySelector("#disqus_error");
-        t.style.display = "block";
-      }
-      (d.head || d.body).appendChild(s);
-    })();
-        $('#load-disqus').remove();    //插入这一行代码 (3/5)
-      }    //插入这一行代码 (4/5)
-    }    //插入这一行代码 (5/5)
-  </script>
-  <!-- disqus 评论 end -->
-  
 
   <!-- aplayer 音频 start -->
   <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
