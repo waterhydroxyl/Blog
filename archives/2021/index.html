@@ -403,28 +403,33 @@ function initWaterfall(selector, el) {
 
 
 
-  <!-- Gaug.es Analytics START -->
+  
+
+
+  <!-- Google Analytics START -->
   <script type="text/javascript">
-    var _gauges = _gauges || [];
-    (function () {
+    (function() {
       if (window.location.hostname === "localhost" || window.location.hostname.startsWith("192.168")) {
         return console.log("本地调试");
       }
-      var t = document.createElement('script');
-      t.type = 'text/javascript';
-      t.async = true;
-      t.id = 'gauges-tracker';
-      t.setAttribute('data-site-id', 'G-E5878683WG');
-      t.setAttribute('data-track-path', 'https://track.gaug.es/track.gif');
-      t.src = 'https://d36ee2fcip1434.cloudfront.net/track.js';
-      var s = document.getElementsByTagName('script')[0];
-      s.parentNode.insertBefore(t, s);
-    })();
+
+      window.dataLayer = window.dataLayer || [];
+      
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      let script = document.createElement("script")
+
+      script.onload = function() {
+        gtag('js', new Date());
+        gtag('config', 'UA-165681463-1');
+      }
+
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-E5878683WG"
+    })()
   </script>
-  <!-- Gaug.es Analytics End -->
-
-  
-
+  <!-- Google Analytics End -->
 
   
 
