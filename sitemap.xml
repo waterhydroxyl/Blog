@@ -2,37 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://ilikestudy.cn/posts/13453.html</loc>
+    <loc>https://ilikestudy.cn/posts/5110.html</loc>
     
-    <lastmod>2021-05-21</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ilikestudy.cn/posts/903.html</loc>
-    
-    <lastmod>2021-05-03</lastmod>
+    <lastmod>2021-06-29</lastmod>
     
   </url>
   
   <url>
     <loc>https://ilikestudy.cn/posts/5109.html</loc>
     
-    <lastmod>2021-04-30</lastmod>
+    <lastmod>2021-06-29</lastmod>
     
   </url>
   
   <url>
     <loc>https://ilikestudy.cn/posts/15479.html</loc>
     
-    <lastmod>2021-03-26</lastmod>
+    <lastmod>2021-06-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ilikestudy.cn/posts/903.html</loc>
+    
+    <lastmod>2021-06-29</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://ilikestudy.cn/posts/13453.html</loc>
+    
+    <lastmod>2021-06-29</lastmod>
     
   </url>
   
   <url>
     <loc>https://ilikestudy.cn/posts/4757.html</loc>
     
-    <lastmod>2021-03-22</lastmod>
+    <lastmod>2021-06-29</lastmod>
     
   </url>
   
@@ -53,22 +60,22 @@
 
   <url>
     <loc>https://ilikestudy.cn/</loc>
-    <lastmod>2021-05-22</lastmod>
+    <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://ilikestudy.cn/tags/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-05-22</lastmod>
+    <loc>https://ilikestudy.cn/tags/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ilikestudy.cn/tags/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2021-05-22</lastmod>
+    <loc>https://ilikestudy.cn/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -76,15 +83,15 @@
 
   
   <url>
-    <loc>https://ilikestudy.cn/categories/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-05-22</lastmod>
+    <loc>https://ilikestudy.cn/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ilikestudy.cn/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2021-05-22</lastmod>
+    <loc>https://ilikestudy.cn/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-06-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

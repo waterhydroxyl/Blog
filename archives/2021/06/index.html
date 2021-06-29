@@ -24,7 +24,7 @@
 
   
 
-  <title>在Hexo中新建独立的HTML页面 | waterhydroxyl</title>
+  <title>归档 | waterhydroxyl</title>
 
   
 
@@ -77,16 +77,7 @@
 
     
 <!-- header container -->
-<header class="header-container post">
-
-  
-  
-
-  
-  
-
-  
-  
+<header class="header-container">
 
   
   
@@ -95,23 +86,12 @@
   
     <div class="header-content">
       
-        <div class="post-image" style="background-image: url(https://cloud.ilikestudy.cn/images/main.jpg)"></div>
+        <div class="post-image" style="background-image: url(https://cloud.ilikestudy.cn/index/header.jpg)"></div>
       
 
       <div class="post-text">
-        <div class="type-wrap">
-          <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>
-        </div>
-        <h1 class="title-wrap">在Hexo中新建独立的HTML页面</h1>
-        <h2 class="title-sub-wrap">
-          <strong>waterhydroxyl</strong>
-          <span>发布于</span>
-          
-  <a href="javascript:;" class="article-date">
-    <time datetime="2021-02-21T02:03:32.000Z" itemprop="datePublished">2021-02-21</time>
-  </a>
-
-        </h2>
+        <h1 class="title-wrap">归档</h1>
+        <h2 class="title-sub-wrap">共有6篇文章</h2>
       </div>
     </div>
   
@@ -119,79 +99,58 @@
   
   
 
+  
+  
+
+  
+  
+
+  
+  
+
 </header>
 
-    <!-- 文章 -->
+    <!-- 归档 -->
 
-<!-- 文章内容 -->
-
-<div class="body-container">
-  <article class="content-container article-container">
-    <div class="article-content">
-      
-      
-
-      <section class="article-entry">
-        <div class="aplayer" data-name='愛にできることはまだあるかい (爱能做到的还有什么)' data-artist='RADWIMPS' data-lrc='https://cloud.ilikestudy.cn/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).lrc' data-url='https://cloud.ilikestudy.cn/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).mp3' data-cover='https://cloud.ilikestudy.cn/music/RADWIMPS - 愛にできることはまだあるかい (爱能做到的还有什么).jpg' ></div>
-<h3 id="实现方法："><a href="#实现方法：" class="headerlink" title="实现方法："></a>实现方法：</h3><p>Hexo 是一个轻量、快速，简单和强大的博客框架，当我们需要发布博文的时候，只需要将写好的文章（MarkDown 文件）放入本地的文件夹，然后再推送上去就行了，原理就是当我们在执行<code>hexo g</code>命令时，文件就会被转化成 HTML 文件，但是有时候我们需要新建一个独立的页面，这个页面不使用主题的渲染，具有自己独立的样式，可以放一些自己的作品，相册什么的，以下就介绍这种独立页面的实现方法。</p>
-<p>使用 Hexo 提供的跳过渲染配置，在博客根目录的配置文件 <code>_config.yml</code> 里找到 <code>skip_render</code> 关键字，在后面添加想要跳过渲染的页面，比如我们创建 <code>\source\demo\index.html</code>， 配置文件填写：<code>skip_render: 'demo/*'</code>，那么就表示 <code>\source\demo</code> 里所有的文件将跳过渲染，里面的文件将会被直接复制到 public 文件夹，此时就会得到一个独立的 demo 页面；官方文档：<a target="_blank" rel="noopener external nofollow noreferrer" href="https://hexo.io/docs/configuration">https://hexo.io/docs/configuration</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># Directory</span><br><span class="hljs-attr">source_dir:</span> <span class="hljs-string">source</span><br><span class="hljs-attr">public_dir:</span> <span class="hljs-string">public</span><br><span class="hljs-attr">tag_dir:</span> <span class="hljs-string">tags</span><br><span class="hljs-attr">archive_dir:</span> <span class="hljs-string">archives</span><br><span class="hljs-attr">category_dir:</span> <span class="hljs-string">categories</span><br><span class="hljs-attr">code_dir:</span> <span class="hljs-string">downloads/code</span><br><span class="hljs-attr">i18n_dir:</span> <span class="hljs-string">:langh</span><br><span class="hljs-attr">skip_render:</span> <span class="hljs-string">&#x27;demo/*&#x27;</span><br></code></pre></td></tr></table></figure>
-<h3 id="以我博客-许愿-页面为例："><a href="#以我博客-许愿-页面为例：" class="headerlink" title="以我博客 许愿 页面为例："></a>以我博客 <a href="https://ilikestudy.cn/demo">许愿</a> 页面为例：</h3><p><img src="https://cloud.ilikestudy.cn/images/QNmain.png"></p>
-
-      </section>
-
-      <section class="article-footer">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">#教程</a></li></ul>
-      </section>
-
-      <section class="comment">
+<!-- post list container -->
+<div class="body-container float">
+  <div class="content-container article-list">
+    <div class="card-container card-articles">
+      <div class="card-list">
         
-  
-  
-    <div style="text-align:center;">
-      <button class="btncomment" id="load-valine" onclick="valine.load();">
-        加载  Valine  评论区
-      </button>
-    </div>
-    <div class="valine-container">
-      <div id="valine_thread" class="valine-thread"></div>
-    </div>
-  
+          
+          <div class="card-item img">
+            <article>
+              
+                <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/img/v2-1c500426f54eab803016e062bcdbbf39_720w.png)"></div>
+              
+              
+                <a class="article-link card-link" href="/posts/5110.html" itemprop="url"></a>
+              
+              <h2 class="article-title">理解Flex布局方式</h2>
+              <div class="article-meta">
+                <strong>waterhydroxyl</strong>
+                <span>发布于</span>
+                
+  <a href="/posts/5110.html" class="article-date">
+    <time datetime="2021-06-29T11:41:04.583Z" itemprop="datePublished">2021-06-29</time>
+  </a>
 
-  
-  
-
-
-      </section>
-      <section class="article-navs">
+              </div>
+              <div class="article-category">
+                <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+              </div>
+            </article>
+          </div>
         
-  <nav class="card-container card-article-nav">
-    <div class="card-list">
-      
-        <div id="article-nav-newer" class="card-item img">
-          <article>
-            
-              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/images/WindowsLinux.jpg)"></div>
-            
-            <a class="card-link article-nav-link" href="/posts/4757.html"></a>
-            <strong class="article-nav-caption">Newer</strong>
-            <p class="article-nav-title">
-              
-                Windows环境下配置Linux子系统
-              
-            </p>
-          </article>
-        </div>
-      
-      
+      </div>
     </div>
-  </nav>
-  
-      </section>
-
-    </div>
-  </article>
+  </div>
 </div>
+
+<!-- page container -->
+
+
 
     <!-- footer container -->
 <footer id="footer" class="footer">
@@ -241,29 +200,6 @@
 
   
   
-<!-- valine 评论 start -->
-<script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script type="text/javascript" src='https://unpkg.com/valine/dist/Valine.min.js'></script>
-<script type="text/javascript">
-var valine = {
-  load : function (){
-    new Valine({
-      el: "#valine_thread",
-      appId: "zjaMrOldHVTEwok7EMDdN6BA-gzGzoHsz",
-      appKey: "mLKMWJ14HMdRehmCM5fH4hYE",
-      avatar: "monsterid",
-      placeholder: "随便说点什么叭～",
-      notify: true,
-      visitor: true,
-      pageSize: 10,
-    });
-    let addBtn = document.querySelector("#load-valine")
-    addBtn.remove();
- }    //插入这一行代码 (4/5)
-    }  
-</script>
-<!-- valine 评论 end -->
-
 
 
   <!-- aplayer 音频 start -->

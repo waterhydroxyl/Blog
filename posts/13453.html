@@ -176,6 +176,21 @@
   <nav class="card-container card-article-nav">
     <div class="card-list">
       
+        <div id="article-nav-newer" class="card-item img">
+          <article>
+            
+              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/img/v2-1c500426f54eab803016e062bcdbbf39_720w.png)"></div>
+            
+            <a class="card-link article-nav-link" href="/posts/5110.html"></a>
+            <strong class="article-nav-caption">Newer</strong>
+            <p class="article-nav-title">
+              
+                理解Flex布局方式
+              
+            </p>
+          </article>
+        </div>
+      
       
         <div id="article-nav-older" class="card-item img">
           <article>
@@ -333,34 +348,6 @@ var valine = {
 </script>
 <!-- dplayer 视频 end -->
 
-
-<!-- waterfall 瀑布流 start -->
-
-<script src="/lib/waterfall.min.js"></script>
-
-<script type="text/javascript">
-
-const waterfalls = document.querySelectorAll(".waterfall-container");
-
-if (waterfalls && waterfalls.length > 0) {
-  waterfalls.forEach((waterfall, index) => {
-    let cls = "waterfall-container-" + index;
-    waterfall.classList.add(cls);
-    initWaterfall(cls, waterfall);
-  });
-}
-
-function initWaterfall(selector, el) {
-  const options = {};
-  if (Object.keys(el.dataset).length > 0) {
-    for (let k in el.dataset) {
-      options[k] = el.dataset[k];
-    }
-  }
-  waterfall(`.${selector}`, options);
-}
-</script>
-<!-- waterfall 瀑布流 end -->
 
 
   <!-- zoom start -->

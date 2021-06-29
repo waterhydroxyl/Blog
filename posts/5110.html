@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+    <meta name="description" content="前端 | 笔记 | 学习 | 萌新">
+  
+
+  
+    <meta name="keywords" content="waterhydroxyl, blog, 前端, 笔记">
+  
+
+  
+    <meta name="author" content="waterhydroxyl">
+  
+
+  
+
+  
+
+  <title>理解Flex布局方式 | waterhydroxyl</title>
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@1.1.3/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs@9.16.2/styles/monokai.css">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+ <script data-ad-client="ca-pub-7869113324411211" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          waterhydroxyl
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/demo/">许愿</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      
+        <div class="post-image" style="background-image: url(https://cloud.ilikestudy.cn/img/v2-1c500426f54eab803016e062bcdbbf39_720w.png)"></div>
+      
+
+      <div class="post-text">
+        <div class="type-wrap">
+          <a class="article-category-link" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+        </div>
+        <h1 class="title-wrap">理解Flex布局方式</h1>
+        <h2 class="title-sub-wrap">
+          <strong>waterhydroxyl</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2021-06-29T11:41:04.583Z" itemprop="datePublished">2021-06-29</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h2 id="Flex"><a href="#Flex" class="headerlink" title="Flex"></a>Flex</h2><p>都 9102 年了，还在用 table、用 float 写网页吗？Flexbox 是现今必备的技能，它是第一套专门用于网页布局的 CSS 方法，知名的 CSS Framework 如 Bootstrap 4、Foundation (最新版本甚至改用 Grid 了)、Tailwind 等等都已使用 Flexbox 为基础。</p>
+<h3 id="flex布局主要分类两个角色flex-container和flex-itmes"><a href="#flex布局主要分类两个角色flex-container和flex-itmes" class="headerlink" title="flex布局主要分类两个角色flex-container和flex-itmes"></a>flex布局主要分类两个角色flex-container和flex-itmes</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;container&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box A&quot;</span>&gt;</span>A<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box B&quot;</span>&gt;</span>B<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box C &quot;</span>&gt;</span>C<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box D&quot;</span>&gt;</span>D<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box E &quot;</span>&gt;</span>E<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;box F&quot;</span>&gt;</span>F<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>&#125;<br><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">width</span>:<span class="hljs-number">60px</span>;<br>  <span class="hljs-attribute">height</span>:<span class="hljs-number">60px</span>;<br>  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">60px</span>;<br>  <span class="hljs-attribute">text-align</span>: center;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://cloud.ilikestudy.cn/img/image-20210628144122148.png" alt="image-20210628144122148"></p>
+<h2 id="flex-container的设定"><a href="#flex-container的设定" class="headerlink" title="flex-container的设定"></a>flex-container的设定</h2><h3 id="flex-direction"><a href="#flex-direction" class="headerlink" title="flex-direction"></a>flex-direction</h3><p>设置flex-items在容器里的排序方向（同时决定主轴），默认值为row。</p>
+<ul>
+<li>flex-direction: column</li>
+</ul>
+<p><img src="https://cloud.ilikestudy.cn/img/image-20210628144540175.png" alt="image-20210628144540175"></p>
+<ul>
+<li>flex-direction: column-reverse;</li>
+</ul>
+<p><img src="https://cloud.ilikestudy.cn/img/image-20210628145438041.png" alt="image-20210628145438041"></p>
+<ul>
+<li>flex-direction: row-reverse;</li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628145548599.png" alt="image-20210628145548599"></p>
+<h3 id="justify-content"><a href="#justify-content" class="headerlink" title="justify-content"></a>justify-content</h3><p>定义了浏览器如何分配顺着父容器主轴的弹性元素之间及其周围的空间。</p>
+<ul>
+<li><p>justify-content: center;     </p>
+</li>
+<li><p>justify-content: flex-start;</p>
+</li>
+<li><p>justify-content: flex-end;   </p>
+</li>
+<li><p>justify-content: space-around;</p>
+</li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628153653362.png" alt="image-20210628153653362"></p>
+<ul>
+<li>justify-content: space-between;</li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628153838217.png" alt="image-20210628153838217"></p>
+<ul>
+<li>justify-content: space-evenly;</li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628154336521.png" alt="image-20210628154336521"></p>
+<h3 id="align-items"><a href="#align-items" class="headerlink" title="align-items"></a>align-items</h3><p>设置项目在其包含块中在交叉轴方向上的对齐方式。</p>
+<ul>
+<li><p>stretch; 弹性元素被在侧轴方向被拉伸到与容器相同的高度或宽度。(一般会给item设置宽高，很少用)</p>
+</li>
+<li><p>flex-start; 元素向侧轴起点对齐。</p>
+</li>
+<li><p>flex-end; 元素向侧轴终点对齐。</p>
+</li>
+<li><p>center； 元素在侧轴居中。如果元素在侧轴上的高度高于其容器，那么在两个方向上溢出距离相同。</p>
+</li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628155147221.png" alt="image-20210628155147221"></p>
+<h3 id="flex-warp"><a href="#flex-warp" class="headerlink" title="flex-warp;"></a>flex-warp;</h3><ul>
+<li>flex-warp: warp; 指定 flex 元素单行显示还是多行显示 。如果允许换行，这个属性允许你控制行的堆叠方向。</li>
+</ul>
+<h3 id="flex-direction可以和flex-warp组合写成flex-flow"><a href="#flex-direction可以和flex-warp组合写成flex-flow" class="headerlink" title="flex-direction可以和flex-warp组合写成flex-flow"></a>flex-direction可以和flex-warp组合写成flex-flow</h3><h3 id="align-conten"><a href="#align-conten" class="headerlink" title="align-conten"></a>align-conten</h3><p>只在flex-warp: warp; 时生效</p>
+<ul>
+<li><p>align-content: center;   将项目放置在中点 </p>
+</li>
+<li><p>align-content: flex-start; 从起始点开始放置flex元素 </p>
+</li>
+</ul>
+<p><img src="https://cloud.ilikestudy.cn/img/image-20210628160837340.png" alt="image-20210628160837340"></p>
+<ul>
+<li>align-content: flex-end;   从终止点开始放置flex元素 </li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628160755753.png" alt="image-20210628160755753"></p>
+<ul>
+<li>align-content: space-around;</li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628161005145.png" alt="image-20210628161005145"></p>
+<ul>
+<li>align-content: space-between；</li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628161103521.png" alt="image-20210628161103521"></p>
+<h2 id="flex-items的设定"><a href="#flex-items的设定" class="headerlink" title="flex-items的设定"></a>flex-items的设定</h2><h3 id="order"><a href="#order" class="headerlink" title="order"></a>order</h3><ul>
+<li>order: -1/0/1</li>
+</ul>
+<p>默认值为0，排序为由小到大排列</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.F</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#EEEC00</span>;<br>  <span class="hljs-attribute">order</span>: -<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628161504810.png" alt="image-20210628161504810"></p>
+<ul>
+<li>align-self</li>
+</ul>
+<p>对齐当前 flex 行中的 flex 元素，并覆盖已有的align-items 的值. 如果任何 flex 元素的侧轴方向 margin 值设置为 auto，则会忽略 align-self</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.A</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#A8C0CE</span>;<br>  <span class="hljs-attribute">align-self</span>: flex-end;<br>&#125;<br><span class="hljs-selector-class">.B</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#B0B6BA</span>;<br>  <span class="hljs-attribute">align-self</span>: flex-start;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628161649501.png" alt="image-20210628161649501"></p>
+<h3 id="flex-basis"><a href="#flex-basis" class="headerlink" title="flex-basis"></a>flex-basis</h3><p>指定了 flex 元素在主轴方向上的初始大小。如果不使用  box-sizing 改变盒模型的话，那么这个属性就决定了 flex 元素的内容盒（content-box）的尺寸。</p>
+<ul>
+<li><p>flex-basis: 0; 按照内容确定宽度大小</p>
+</li>
+<li><p>flex-basis: auto; 按照原来大小，即使初始的60px</p>
+</li>
+<li><p>flex-basis: 75px;</p>
+</li>
+</ul>
+<p>如图此时flex-direction为row时，将会覆盖items的宽度</p>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628162354840.png" alt="image-20210628162354840"></p>
+<h3 id="flex-grow"><a href="#flex-grow" class="headerlink" title="flex-grow"></a>flex-grow</h3><ul>
+<li>flex-grow: 1; 剩余空间等比分扩大</li>
+</ul>
+<p><img src="https://ilikestudy-1256165499.cos.ap-chengdu.myqcloud.com/image-20210628162922797.png" alt="image-20210628162922797"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.box</span> &#123;<br>  <span class="hljs-attribute">width</span>:<span class="hljs-number">60px</span>;<br>  <span class="hljs-attribute">height</span>:<span class="hljs-number">60px</span>;<br>  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">60px</span>;<br>  <span class="hljs-attribute">text-align</span>: center;<br>  <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;<br>&#125;<br><span class="hljs-selector-class">.A</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#A8C0CE</span>;<br>&#125;<br><span class="hljs-selector-class">.B</span> &#123;<br>  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#B0B6BA</span>;<br>  <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">3</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>B占剩余空间的3份及3/5</li>
+</ul>
+<p><img src="C:\Users\waterhydroxyl\AppData\Roaming\Typora\typora-user-images\image-20210628163246748.png" alt="image-20210628163246748"></p>
+<h3 id="flex-shrink"><a href="#flex-shrink" class="headerlink" title="flex- shrink"></a>flex- shrink</h3><p>指定了 flex 元素的收缩规则。flex 元素仅在默认宽度之和大于容器的时候才会发生收缩，其收缩的大小是依据 flex-shrink 的值。</p>
+<p>同比flex-grow。</p>
+<h3 id="flex"><a href="#flex" class="headerlink" title="flex"></a>flex</h3><p>规定了弹性元素如何伸长或缩短以适应flex容器中的可用空间。这是一个简写属性，用来设置 flex-grow, flex-shrink与flex-basis。</p>
+<ul>
+<li><p>flex: 1 1 auto; 平均分配扩大和缩小剩余大小，auto按照原来大小</p>
+</li>
+<li><p>flex: 0 1 150px; 每个item的宽度最多是150px；只会因容器不足时缩小，而不会在有剩余空间的时候扩大。</p>
+</li>
+<li><p>flex: 0 0 200px; 固定每个flex item的宽度是200px，不扩大也不缩小</p>
+</li>
+</ul>
+<p><del>面试题</del> ：flex:1什么意思？flex:1 0什么意思？（那你知道flex这个属性怎么来的吗？（知道:basis,shrink,grow）,既然你知道是这三个合成的，那flex:1 0 什么意思？</p>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">#笔记</a></li></ul>
+      </section>
+
+      <section class="comment">
+        
+  
+  
+    <div style="text-align:center;">
+      <button class="btncomment" id="load-valine" onclick="valine.load();">
+        加载  Valine  评论区
+      </button>
+    </div>
+    <div class="valine-container">
+      <div id="valine_thread" class="valine-thread"></div>
+    </div>
+  
+
+  
+  
+
+
+      </section>
+      <section class="article-navs">
+        
+  <nav class="card-container card-article-nav">
+    <div class="card-list">
+      
+      
+        <div id="article-nav-older" class="card-item img">
+          <article>
+            
+              <div class="card-cover" style="background-image: url(https://cloud.ilikestudy.cn/images/ES6_01/js.jpg)"></div>
+            
+            <a class="card-link article-nav-link" href="/posts/13453.html"></a>
+            <strong class="article-nav-caption">Older</strong>
+            <p class="article-nav-title">
+              
+                ES6知识小碎片
+              
+            </p>
+          </article>
+        </div>
+      
+    </div>
+  </nav>
+  
+      </section>
+
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+    <div class="footer-container">
+
+        <p>&copy; 2021 <a href="/" target="_blank">waterhydroxyl</a></p>
+
+        
+
+
+        <div style="width:300px;margin:0 auto; padding:20px 0;">
+            <a target="_blank" href="https://beian.miit.gov.cn"
+               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">桂ICP备17007944号</p></a>
+            <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=45048102000081"
+               style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="https://cloud.ilikestudy.cn/index/beian.png"
+                                                                                                    style="float:left;"/>
+                <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">桂公网安备
+                    45048102000081号</p></a>
+
+        </div>
+        <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a
+                    href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a>
+        </p>
+
+
+        <!--
+        <div class="footer-container__texts">
+          <p>ヽ｀、ヽ｀｀、ヽ｀ヽ｀、、ヽ｀ヽ、ヽ｀、ヽ｀｀、ヽ、｀｀、、ヽ｀ヽ、｀｀、、ヽ｀ヽ、｀ヽ、｀ヽ、｀ヽ</p>
+          <p>｀、ヽ｀｀、ヽ、｀｀｀、｀、ヽ🌙｀｀、｀ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、ヽ｀｀、｀ヽ、｀</p>
+          <p>｀、｀｀、｀、ヽ｀｀、、ヽヽ｀、｀ヽ｀ヽ、ヽ｀、ヽ｀ヽ、ヽ｀、、、ヽヽ、｀｀、、ヽ｀、ヽ｀｀、ヽ｀ヽ｀</p>
+          <p>ヽ｀、｀｀、｀、ヽ｀｀、、ヽヽ｀、｀、、ヽヽ、｀Time waits for on one 🍓｀、、ヽ｀、ヽ｀｀、ヽ｀ヽ｀</p>
+          <p>｀ヽ｀｀、ヽ｀ヽ｀、、ヽ｀ヽ｀ヽ｀ヽ、ヽ｀、ヽ｀｀、ヽ、｀｀、、ヽ｀ヽ、｀｀、、ヽ｀ヽ、｀ヽ、｀ヽ、｀ヽ</p>
+        </div>
+        -->
+    </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+<!-- valine 评论 start -->
+<script type="text/javascript" src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src='https://unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+var valine = {
+  load : function (){
+    new Valine({
+      el: "#valine_thread",
+      appId: "zjaMrOldHVTEwok7EMDdN6BA-gzGzoHsz",
+      appKey: "mLKMWJ14HMdRehmCM5fH4hYE",
+      avatar: "monsterid",
+      placeholder: "随便说点什么叭～",
+      notify: true,
+      visitor: true,
+      pageSize: 10,
+    });
+    let addBtn = document.querySelector("#load-valine")
+    addBtn.remove();
+ }    //插入这一行代码 (4/5)
+    }  
+</script>
+<!-- valine 评论 end -->
+
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        let params = {
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        }
+        if (el.dataset.lrc) {
+          params['lrcType'] = 3
+        }
+        new APlayer(params);
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  <!-- Google Analytics START -->
+  <script type="text/javascript">
+    (function() {
+      if (window.location.hostname === "localhost" || window.location.hostname.startsWith("192.168")) {
+        return console.log("本地调试");
+      }
+      window.dataLayer = window.dataLayer || [];
+      
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      let script = document.createElement("script")
+      script.onload = function() {
+        gtag('js', new Date());
+        gtag('config', "G-E5878683WG");
+      }
+      script.src = "https://www.googletagmanager.com/gtag/js?id=G-E5878683WG"
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(script, s);
+    })()
+  </script>
+  <!-- Google Analytics End -->
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>
