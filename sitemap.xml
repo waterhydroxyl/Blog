@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://ilikestudy.cn/posts/5110.html</loc>
+    <loc>https://ilikestudy.cn/posts/38516.html</loc>
     
-    <lastmod>2021-06-29</lastmod>
+    <lastmod>2021-08-15</lastmod>
     
   </url>
   
@@ -60,22 +60,22 @@
 
   <url>
     <loc>https://ilikestudy.cn/</loc>
-    <lastmod>2021-06-29</lastmod>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
   <url>
-    <loc>https://ilikestudy.cn/tags/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2021-06-29</lastmod>
+    <loc>https://ilikestudy.cn/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ilikestudy.cn/tags/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-06-29</lastmod>
+    <loc>https://ilikestudy.cn/tags/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -83,15 +83,15 @@
 
   
   <url>
-    <loc>https://ilikestudy.cn/categories/%E6%95%99%E7%A8%8B/</loc>
-    <lastmod>2021-06-29</lastmod>
+    <loc>https://ilikestudy.cn/categories/%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://ilikestudy.cn/categories/%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-06-29</lastmod>
+    <loc>https://ilikestudy.cn/categories/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2021-08-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
